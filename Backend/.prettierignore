@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build folders
+dist/
+build/
+
+# Coverage
+coverage/
+
+# Lock files (optional)
+package-lock.json
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+
+# Generated files
+*.min.js
+*.min.css
