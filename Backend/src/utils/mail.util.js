@@ -58,7 +58,7 @@ const emailVerificationMailgenContent = (username, verificationUrl) => {
                 },
             },
             outro: [
-                "This verification link will expire in 24 hours.",
+                "This verification link will expire in 10 minutes.",
                 "If you didn't create a FillGap account, you can safely ignore this email.",
                 "Need help? Simply reply to this email and our team will assist you.",
             ],
@@ -84,7 +84,7 @@ const forgotPasswordMailgenContent = (username, forgotPasswordUrl) => {
                 },
             },
             outro: [
-                "This password reset link will expire in 15 minutes for security reasons.",
+                "This password reset link will expire in 10 minutes for security reasons.",
                 "If you didn't request a password reset, you can safely ignore this email. Your account will remain secure and no changes will be made.",
                 "If you're having trouble clicking the button, copy and paste the URL into your browser.",
             ],
@@ -92,3 +92,9 @@ const forgotPasswordMailgenContent = (username, forgotPasswordUrl) => {
         },
     };
 };
+
+export {
+    sendEmail,
+    emailVerificationMailgenContent,
+    forgotPasswordMailgenContent,
+}
