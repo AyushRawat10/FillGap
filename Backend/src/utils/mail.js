@@ -1,3 +1,44 @@
+import Mailgen from "mailgen";
+import nodemailer from "nodemailer";
+
+const sendEmail = async (options) => {
+    const mailGenerator = new Mailgen({
+        theme: "default",
+        product: {
+            name: "FillGap",
+            link: "http://localhost:5173", // replace with website url.
+        },
+    });
+
+    const emailText = mailGenerator.generatePlaintext(options.mailgenContent);
+    const emailHtml = mailGenerator.generate(options.mailgenContent);
+
+    const transporter = nodemailer.createTransport({
+        host: process.env.BREVO_SMTP_HOST,
+        port: process.env.BREVO_SMTP_PORT,
+        secure: false,
+        auth: {
+            user: process.env.BREVO_SMTP_USER,
+            pass: process.env.BREVO_SMTP_PASS,
+        },
+    });
+
+    const mail = {
+        from: `"${process.env.MAIL_FROM_NAME}" <${process.env.MAIL_FROM_EMAIL}>`,
+        to: options.email,
+        subject: options.subject,
+        text: emailText,
+        html: emailHtml,
+    }
+
+    try {
+        await transporter.sendMail(mail)
+    } catch (error) {
+        console.log("Email service failed siliently. Make sure that you have provided your BREVO credentials in the .env file");
+        console.error("Error : ", error);
+    }
+};
+
 const emailVerificationMailgenContent = (username, verificationUrl) => {
     return {
         body: {
