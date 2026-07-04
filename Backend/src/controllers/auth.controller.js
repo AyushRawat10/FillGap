@@ -134,22 +134,24 @@ const logoutUser = asyncHandler(async (req, res) => {
         {
             $set: {
                 refreshToken: "",
-            }
+            },
         },
         {
             new: true,
         }
-    )
+    );
 
     const options = {
         httpOnly: true,
         secure: true,
-    }
+    };
 
     res.status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, {}, "User logout successfully."))
-})
+        .clearCookie("accessToken", options)
+        .clearCookie("refreshToken", options)
+        .json(new ApiResponse(200, {}, "User logout successfully."));
+});
+
+
 
 export { registerUser, loginUser, logoutUser };
