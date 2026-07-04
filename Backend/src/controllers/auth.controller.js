@@ -198,4 +198,43 @@ const emailVerification = asyncHandler(async (req, res) => {
         );
 });
 
-export { registerUser, loginUser, logoutUser, getCurrentUser, emailVerification };
+const resendEmailVerification = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+        throw new ApiError(404, "User not found.");
+    }
+    if (user.isEmailVerified) {
+        throw new ApiError(409, "Email is already verified.");
+    }
+
+    const { unHashedToken, hashedToken, tokenExpiry } =
+        await user.generateTemporaryToken();
+
+    user.emailVerificationToken = hashedToken;
+    user.emailVerificationExpiry = tokenExpiry;
+
+    await user.save({ validateBeforeSave: false });
+
+    await sendEmail({
+        email: user.email,
+        subject: "Verify Your Email Address | FillGap",
+        mailgenContent: emailVerificationMailgenContent(
+            user.username,
+            `${req.protocol}://${req.get("host")}/api/v1/users/verify-email/${unHashedToken}`
+        ),
+    });
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, {}, "Mail has been sent to your email ID"));
+});
+
+export {
+    registerUser,
+    loginUser,
+    logoutUser,
+    getCurrentUser,
+    emailVerification,
+    resendEmailVerification
+};
