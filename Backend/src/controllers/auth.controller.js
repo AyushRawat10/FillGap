@@ -75,13 +75,15 @@ const registerUser = asyncHandler(async (req, res) => {
         );
     }
 
-    res.status(201).json(
-        new ApiResponse(
-            201,
-            { user: createdUser },
-            "User registered successfully and verification email has been sent on your email."
-        )
-    );
+    return res
+        .status(201)
+        .json(
+            new ApiResponse(
+                201,
+                { user: createdUser },
+                "User registered successfully and verification email has been sent on your email."
+            )
+        );
 });
 
 const loginUser = asyncHandler(async (req, res) => {
@@ -116,7 +118,8 @@ const loginUser = asyncHandler(async (req, res) => {
         secure: true,
     };
 
-    res.status(200)
+    return res
+        .status(200)
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(
@@ -146,16 +149,53 @@ const logoutUser = asyncHandler(async (req, res) => {
         secure: true,
     };
 
-    res.status(200)
+    return res
+        .status(200)
         .clearCookie("accessToken", options)
         .clearCookie("refreshToken", options)
         .json(new ApiResponse(200, {}, "User logout successfully."));
 });
 
 const getCurrentUser = asyncHandler(async (req, res) => {
-    res.status(200).json(
-        new ApiResponse(200, req.user, "Current user fetched successfully.")
-    );
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, req.user, "Current user fetched successfully.")
+        );
 });
 
-export { registerUser, loginUser, logoutUser, getCurrentUser };
+const emailVerification = asyncHandler(async (req, res) => {
+    const { verificationToken } = req.params;
+
+    if (!verificationToken) {
+        throw new ApiError(400, "Email verification token required.");
+    }
+
+    const hashedToken = crypto
+        .createHash("sha256")
+        .update(verificationToken)
+        .digest("hex");
+
+    const user = await User.findOne({
+        emailVerificationToken: hashedToken,
+        emailVerificationExpiry: { $gt: Date.now() },
+    });
+
+    if (!user) {
+        throw new ApiError(400, "Invalid or Expired token.");
+    }
+
+    user.emailVerificationToken = undefined;
+    user.emailVerificationExpiry = undefined;
+    user.isEmailVerified = true;
+
+    await user.save({ validateBeforeSave: false });
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, { isEmailVerified: true }, "Email is verified")
+        );
+});
+
+export { registerUser, loginUser, logoutUser, getCurrentUser, emailVerification };
