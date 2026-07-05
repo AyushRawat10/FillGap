@@ -27,7 +27,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { username, emain, password } = req.body;
+    const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
         new ApiError(400, "Required all details");
@@ -235,7 +235,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     const incomingRefreshToken =
         req.cookies?.refreshToken || req.body.refreshToken;
 
-    if (!incomingRefreshTokenoken) {
+    if (!incomingRefreshToken) {
         throw new ApiError(401, "Unauthorized access.");
     }
 
@@ -261,10 +261,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         };
 
         const { accessToken, refreshToken: newRefreshToken } =
-            await generateAccessAndRefreshToken();
-
-        user.refreshToken = newRefreshToken;
-        await user.save();
+            await generateAccessAndRefreshToken(user._id);
 
         return res
             .status(200)
@@ -278,6 +275,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
                 )
             );
     } catch (error) {
+        console.log(error)
         throw new ApiError(401, "Unauthorized Access !");
     }
 });
