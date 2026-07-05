@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+    changeCurrentPassword,
     emailVerification,
     forgotPasswordRequest,
     getCurrentUser,
@@ -27,5 +28,6 @@ router.route("/me").get(verifyJWT, getCurrentUser);
 router
     .route("/resend-email-verification")
     .post(verifyJWT, resendEmailVerification);
+router.route("/change-password").post(verifyJWT, changeCurrentPassword);
 
 export default router;
