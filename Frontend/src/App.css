@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #0a0a0a inset !important; /* your dark bg color */
+  -webkit-text-fill-color: #ffffff !important; /* your text color */
+  caret-color: #ffffff; /* so the cursor stays visible */
+  transition: background-color 5000s ease-in-out 0s; /* delays browser's own transition */
+}

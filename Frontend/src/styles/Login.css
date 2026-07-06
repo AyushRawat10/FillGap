@@ -1,0 +1,314 @@
+* {
+  box-sizing: border-box;
+}
+
+.fg-page {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0d0806;
+  color: #f2e9e4;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Nav */
+.fg-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid #2a1b16;
+}
+
+.fg-logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #f4a58a;
+}
+
+.fg-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.fg-signin-link {
+  font-size: 14px;
+  color: #e7d9d2;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.fg-signin-link:hover {
+  color: #ffffff;
+}
+
+.fg-btn-primary {
+  background-color: #f4623a;
+  color: #1a0f0a;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.fg-btn-primary:hover {
+  background-color: #e5552e;
+}
+
+/* Main */
+.fg-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 16px;
+  background:
+    radial-gradient(ellipse 600px 500px at 50% 20%, rgba(120, 20, 10, 0.35), transparent 70%),
+    #0d0806;
+}
+
+.fg-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: #150d0a;
+  border: 1px solid #2a1b16;
+  border-radius: 12px;
+  padding: 40px;
+}
+
+.fg-title {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.fg-subtitle {
+  text-align: center;
+  color: #b3a39b;
+  font-size: 14px;
+  margin: 0 0 32px;
+  line-height: 1.6;
+}
+
+.fg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fg-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.fg-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #d8cbc4;
+  margin-bottom: 8px;
+}
+
+.fg-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.fg-label-row .fg-label {
+  margin-bottom: 0;
+}
+
+.fg-forgot-link {
+  font-size: 12px;
+  color: #f4623a;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.fg-forgot-link:hover {
+  color: #f4a58a;
+}
+
+.fg-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #0d0806;
+  border: 1px solid #2a1b16;
+  border-radius: 6px;
+  padding: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.fg-input-wrap:focus-within {
+  border-color: #f4623a;
+}
+
+.fg-icon {
+  color: #6b5c54;
+  flex-shrink: 0;
+}
+
+.fg-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  width: 100%;
+  color: #f2e9e4;
+}
+
+.fg-input::placeholder {
+  color: #5c4d46;
+}
+
+.fg-signin-btn {
+  margin-top: 4px;
+  background-color: #f4623a;
+  color: #1a0f0a;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.fg-signin-btn:hover {
+  background-color: #e5552e;
+}
+
+/* Divider */
+.fg-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0;
+}
+
+.fg-divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #2a1b16;
+}
+
+.fg-divider span {
+  font-size: 12px;
+  color: #6b5c54;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Social buttons */
+.fg-social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.fg-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #2a1b16;
+  background-color: #1a110d;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #f2e9e4;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.fg-social-btn:hover {
+  background-color: #20150f;
+}
+
+/* Signup text */
+.fg-signup-text {
+  text-align: center;
+  font-size: 14px;
+  color: #b3a39b;
+  margin: 28px 0 0;
+}
+
+.fg-signup-link {
+  color: #f4623a;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.fg-signup-link:hover {
+  color: #f4a58a;
+}
+
+/* Footer */
+.fg-footer {
+  border-top: 1px solid #2a1b16;
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.fg-footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.fg-footer-links {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+  color: #b3a39b;
+}
+
+.fg-footer-links a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.fg-footer-links a:hover {
+  color: #ffffff;
+}
+
+.fg-copyright {
+  font-size: 12px;
+  color: #6b5c54;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fg-nav-links {
+    display: none;
+  }
+
+  .fg-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .fg-footer-right {
+    align-items: center;
+  }
+}

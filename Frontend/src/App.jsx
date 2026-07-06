@@ -1,14 +1,16 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <h1>Welcome to the FillGap</h1>
+      <Register />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
