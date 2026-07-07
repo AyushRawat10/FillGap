@@ -1,8 +1,5 @@
-* {
-  box-sizing: border-box;
-}
 
-.fg-page {
+.fgl-page {
   min-height: 100vh;
   width: 100%;
   background-color: #0d0806;
@@ -13,7 +10,7 @@
 }
 
 /* Nav */
-.fg-nav {
+.fgl-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,31 +18,32 @@
   border-bottom: 1px solid #2a1b16;
 }
 
-.fg-logo {
+.fgl-logo {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #f4a58a;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-.fg-nav-actions {
+.fgl-nav-actions {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.fg-signin-link {
+.fgl-signin-link {
   font-size: 14px;
   color: #e7d9d2;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.fg-signin-link:hover {
+.fgl-signin-link:hover {
   color: #ffffff;
 }
 
-.fg-btn-primary {
+.fgl-btn-primary {
   background-color: #f4623a;
   color: #1a0f0a;
   font-weight: 600;
@@ -57,12 +55,12 @@
   transition: background-color 0.2s ease;
 }
 
-.fg-btn-primary:hover {
+.fgl-btn-primary:hover {
   background-color: #e5552e;
 }
 
 /* Main */
-.fg-main {
+.fgl-main {
   flex: 1;
   display: flex;
   align-items: center;
@@ -73,7 +71,7 @@
     #0d0806;
 }
 
-.fg-card {
+.fgl-card {
   width: 100%;
   max-width: 420px;
   background-color: #150d0a;
@@ -82,14 +80,14 @@
   padding: 40px;
 }
 
-.fg-title {
+.fgl-title {
   font-size: 30px;
   font-weight: 700;
   text-align: center;
   margin: 0 0 12px;
 }
 
-.fg-subtitle {
+.fgl-subtitle {
   text-align: center;
   color: #b3a39b;
   font-size: 14px;
@@ -97,18 +95,18 @@
   line-height: 1.6;
 }
 
-.fg-form {
+.fgl-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.fg-field {
+.fgl-field {
   display: flex;
   flex-direction: column;
 }
 
-.fg-label {
+.fgl-label {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -116,29 +114,29 @@
   margin-bottom: 8px;
 }
 
-.fg-label-row {
+.fgl-label-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
 }
 
-.fg-label-row .fg-label {
+.fgl-label-row .fgl-label {
   margin-bottom: 0;
 }
 
-.fg-forgot-link {
+.fgl-forgot-link {
   font-size: 12px;
   color: #f4623a;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.fg-forgot-link:hover {
+.fgl-forgot-link:hover {
   color: #f4a58a;
 }
 
-.fg-input-wrap {
+.fgl-input-wrap {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -149,16 +147,16 @@
   transition: border-color 0.2s ease;
 }
 
-.fg-input-wrap:focus-within {
+.fgl-input-wrap:focus-within {
   border-color: #f4623a;
 }
 
-.fg-icon {
+.fgl-icon {
   color: #6b5c54;
   flex-shrink: 0;
 }
 
-.fg-input {
+.fgl-input {
   background: transparent;
   border: none;
   outline: none;
@@ -167,11 +165,25 @@
   color: #f2e9e4;
 }
 
-.fg-input::placeholder {
+.fgl-input::placeholder {
   color: #5c4d46;
 }
 
-.fg-signin-btn {
+.fgl-eye-btn {
+  background: none;
+  border: none;
+  color: #6b5c54;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.fgl-eye-btn:hover {
+  color: #b3a39b;
+}
+
+.fgl-signin-btn {
   margin-top: 4px;
   background-color: #f4623a;
   color: #1a0f0a;
@@ -185,25 +197,25 @@
   transition: background-color 0.2s ease;
 }
 
-.fg-signin-btn:hover {
+.fgl-signin-btn:hover {
   background-color: #e5552e;
 }
 
 /* Divider */
-.fg-divider {
+.fgl-divider {
   display: flex;
   align-items: center;
   gap: 12px;
   margin: 28px 0;
 }
 
-.fg-divider-line {
+.fgl-divider-line {
   flex: 1;
   height: 1px;
   background-color: #2a1b16;
 }
 
-.fg-divider span {
+.fgl-divider span {
   font-size: 12px;
   color: #6b5c54;
   letter-spacing: 0.5px;
@@ -211,13 +223,13 @@
 }
 
 /* Social buttons */
-.fg-social-grid {
+.fgl-social-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
 
-.fg-social-btn {
+.fgl-social-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,30 +245,30 @@
   transition: background-color 0.2s ease;
 }
 
-.fg-social-btn:hover {
+.fgl-social-btn:hover {
   background-color: #20150f;
 }
 
 /* Signup text */
-.fg-signup-text {
+.fgl-signup-text {
   text-align: center;
   font-size: 14px;
   color: #b3a39b;
   margin: 28px 0 0;
 }
 
-.fg-signup-link {
+.fgl-signup-link {
   color: #f4623a;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.fg-signup-link:hover {
+.fgl-signup-link:hover {
   color: #f4a58a;
 }
 
 /* Footer */
-.fg-footer {
+.fgl-footer {
   border-top: 1px solid #2a1b16;
   padding: 32px 40px;
   display: flex;
@@ -266,31 +278,31 @@
   flex-wrap: wrap;
 }
 
-.fg-footer-right {
+.fgl-footer-right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
 }
 
-.fg-footer-links {
+.fgl-footer-links {
   display: flex;
   gap: 24px;
   font-size: 14px;
   color: #b3a39b;
 }
 
-.fg-footer-links a {
+.fgl-footer-links a {
   color: inherit;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.fg-footer-links a:hover {
+.fgl-footer-links a:hover {
   color: #ffffff;
 }
 
-.fg-copyright {
+.fgl-copyright {
   font-size: 12px;
   color: #6b5c54;
   margin: 0;
@@ -298,17 +310,17 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .fg-nav-links {
+  .fgl-nav-links {
     display: none;
   }
 
-  .fg-footer {
+  .fgl-footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  .fg-footer-right {
+  .fgl-footer-right {
     align-items: center;
   }
 }

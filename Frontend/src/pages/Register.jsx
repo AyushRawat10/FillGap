@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router";
 import { FileText, BarChart3, Eye, EyeOff } from "lucide-react";
 import "../styles/Register.css";
 
@@ -9,60 +10,67 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [accepted, setAccepted] = useState(false);
 
+  const navigate = useNavigate();
+
   return (
-    <div className="cn-page">
+    <div className="fgr-page">
       {/* Nav */}
-      <nav className="cn-nav">
-        <div className="cn-logo">FILL GAP</div>
-        
-        <div className="cn-nav-actions">
-          <a href="#" className="cn-signin-link">
+      <nav className="fgr-nav">
+        <div className="fgr-logo">FILL GAP</div>
+
+        <div className="fgr-nav-actions">
+          <Link to="/api/v1/auth/login" className="fgr-signin-link">
             Sign In
-          </a>
-          <button className="cn-btn-primary">Back to Home</button>
+          </Link>
+          <Link to="/">
+            <button className="fgr-btn-primary">Back to Home</button>
+          </Link>
         </div>
       </nav>
 
       {/* Main */}
-      <main className="cn-main">
+      <main className="fgr-main">
         {/* Left content */}
-        <div className="cn-hero">
-          <div className="cn-badge">
-            <span className="cn-badge-dot" />
+        <div className="fgr-hero">
+          <div className="fgr-badge">
+            <span className="fgr-badge-dot" />
             NEXT-GEN INTELLIGENCE
           </div>
 
-          <h1 className="cn-hero-title">
-            <em>Fill</em> the <em>Gap</em> Between Your Resume and Your Dream Job.
+          <h1 className="fgr-hero-title">
+            <em>Fill</em> the <em>Gap</em> Today. Shape Tomorrow.
             <br />
           </h1>
 
-          <p className="cn-hero-text">
+          <p className="fgr-hero-text">
             Elevate your recruitment process with cinematic precision. Transform
             fragmented job descriptions and raw resumes into comprehensive,
             data-driven interview reports in seconds.
           </p>
 
-          <div className="cn-features">
-            <div className="cn-feature">
-              <div className="cn-feature-icon">
+          <div className="fgr-features">
+            <div className="fgr-feature">
+              <div className="fgr-feature-icon">
                 <FileText size={20} />
               </div>
               <div>
-                <div className="cn-feature-title">Intelligent Report Generation</div>
-                <div className="cn-feature-desc">
-                  Transform resume and job description analysis into structured interview reports instantly.
+                <div className="fgr-feature-title">
+                  Intelligent Report Generation
+                </div>
+                <div className="fgr-feature-desc">
+                  Transform resume and job description analysis into structured
+                  interview reports instantly.
                 </div>
               </div>
             </div>
 
-            <div className="cn-feature">
-              <div className="cn-feature-icon">
+            <div className="fgr-feature">
+              <div className="fgr-feature-icon">
                 <BarChart3 size={20} />
               </div>
               <div>
-                <div className="cn-feature-title">Automated Reporting</div>
-                <div className="cn-feature-desc">
+                <div className="fgr-feature-title">Automated Reporting</div>
+                <div className="fgr-feature-desc">
                   Instant generation of structured, high-fidelity interview
                   guides.
                 </div>
@@ -72,52 +80,52 @@ const Register = () => {
         </div>
 
         {/* Right form card */}
-        <div className="cn-card">
-          <h2 className="cn-card-title">Create Account</h2>
-          <p className="cn-card-subtitle">
+        <div className="fgr-card">
+          <h2 className="fgr-card-title">Create Account</h2>
+          <p className="fgr-card-subtitle">
             Every Skill You Gain Helps Fill the Gap.
           </p>
 
-          <form onSubmit={(e) => e.preventDefault()} className="cn-form">
-            <div className="cn-field">
-              <label className="cn-label">FULL NAME</label>
-              <div className="cn-input-wrap">
+          <form onSubmit={(e) => e.preventDefault()} className="fgr-form">
+            <div className="fgr-field">
+              <label className="fgr-label">FULL NAME</label>
+              <div className="fgr-input-wrap">
                 <input
                   type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                   placeholder="AYUSH RAWAT"
-                  className="cn-input"
+                  className="fgr-input"
                 />
               </div>
             </div>
 
-            <div className="cn-field">
-              <label className="cn-label">EMAIL</label>
-              <div className="cn-input-wrap">
+            <div className="fgr-field">
+              <label className="fgr-label">EMAIL</label>
+              <div className="fgr-input-wrap">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="RAWAT@FILL-GAP.COM"
-                  className="cn-input"
+                  className="fgr-input"
                 />
               </div>
             </div>
 
-            <div className="cn-field">
-              <label className="cn-label">PASSWORD</label>
-              <div className="cn-input-wrap">
+            <div className="fgr-field">
+              <label className="fgr-label">PASSWORD</label>
+              <div className="fgr-input-wrap">
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="cn-input"
+                  className="fgr-input"
                 />
                 <button
                   type="button"
-                  className="cn-eye-btn"
+                  className="fgr-eye-btn"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label="Toggle password visibility"
                 >
@@ -126,40 +134,42 @@ const Register = () => {
               </div>
             </div>
 
-            <button type="submit" className="cn-submit-btn">
+            <button
+              type="submit"
+              className="fgr-submit-btn"
+              onClick={() => navigate("/api/v1/auth/login")}
+            >
               REGISTER
             </button>
           </form>
 
-          <p className="cn-footer-text">
+          <p className="fgr-footer-text">
             Do you have an account?{" "}
-            <a href="#" className="cn-inline-link">
+            <Link to="/api/v1/auth/login" className="fgr-inline-link">
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="cn-footer">
+      <footer className="fgr-footer">
         <div>
-          <div className="cn-logo">FILL GAP</div>
-          <p className="cn-footer-tagline">
+          <div className="fgr-logo">FILL GAP</div>
+          <p className="fgr-footer-tagline">
             Forging the next generation of high-
             <br />
             performance recruitment technology.
           </p>
         </div>
 
-        <div className="cn-footer-links">
+        <div className="fgr-footer-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>
           <a href="#">Contact</a>
         </div>
 
-        <p className="cn-copyright">
-          © 2024 Fill Gap. All rights reserved.
-        </p>
+        <p className="fgr-copyright">© 2024 Fill Gap. All rights reserved.</p>
       </footer>
     </div>
   );
