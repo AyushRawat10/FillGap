@@ -16,4 +16,5 @@ input:-webkit-autofill:active {
 
 .text-red-500 {
   color: rgb(231, 0, 0);
+  font-size: 12px;
 }

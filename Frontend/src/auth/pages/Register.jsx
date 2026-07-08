@@ -1,60 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { FileText, BarChart3, Eye, EyeOff } from "lucide-react";
 import "../styles/Register.css";
+import { useAuth } from "../hooks/useAuth.hook";
+import Loader from "../components/Loader";
 
 const Register = () => {
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
-  const [accepted, setAccepted] = useState(false);
+  const { loading, handleRegister } = useAuth();
 
   const navigate = useNavigate();
 
-  
   const validateForm = () => {
     const newErrors = {};
-    
-    const userNameRegex = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
-    
-    if(!userName.trim()) {
-      newErrors.userName = "Username is required !";
-    } else if(!userNameRegex.test(userName)) {
-      newErrors.userName = "Username must start with a letter and be 3-20 characters !"
+
+    const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
+
+    if (!username.trim()) {
+      newErrors.username = "Username is required !";
+    } else if (!usernameRegex.test(username)) {
+      newErrors.username =
+        "Username must start with a letter and be 3-20 characters !";
     }
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if(!email.trim()) {
+    if (!email.trim()) {
       newErrors.email = "Email is required !";
-    } else if(!emailRegex.test(email)) {
-      newErrors.email = "Please enter a valid email address !"
+    } else if (!emailRegex.test(email)) {
+      newErrors.email = "Please enter a valid email address !";
     }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
-    if(!password) {
+    if (!password) {
       newErrors.password = "Password is required !";
     } else if (!passwordRegex.test(password)) {
-      newErrors.password = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character !"
+      newErrors.password =
+        "Password must be at least 8 characters and include uppercase, lowercase, number, and special character !";
     }
 
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
-    
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!validateForm()) {
+    if (!validateForm()) {
       return;
     }
 
-    navigate("/api/v1/auth/login")
+    const success = await handleRegister({ username, email, password });
+
+    if (success) {
+      navigate("/api/v1/auth/login");
+    }
+  };
+
+  if (loading) {
+    return <Loader text="Creating your account..." />;
   }
 
   return (
@@ -137,13 +148,15 @@ const Register = () => {
               <div className="fgr-input-wrap">
                 <input
                   type="text"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   placeholder="AYUSH RAWAT"
                   className="fgr-input"
                 />
               </div>
-              {errors.userName && (<p className="text-red-500">{errors.userName}</p>)}
+              {errors.username && (
+                <p className="text-red-500">{errors.username}</p>
+              )}
             </div>
 
             <div className="fgr-field">
@@ -157,7 +170,7 @@ const Register = () => {
                   className="fgr-input"
                 />
               </div>
-              {errors.email && (<p className="text-red-500">{errors.email}</p>)}
+              {errors.email && <p className="text-red-500">{errors.email}</p>}
             </div>
 
             <div className="fgr-field">
@@ -179,7 +192,9 @@ const Register = () => {
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
-              {errors.password && (<p className="text-red-500">{errors.password}</p>)}
+              {errors.password && (
+                <p className="text-red-500">{errors.password}</p>
+              )}
             </div>
 
             <button

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import "../styles/Login.css";
 
@@ -7,6 +7,43 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!email.trim()) {
+      newErrors.email = "Email is required !";
+    } else if(!emailRegex.test(email)) {
+      newErrors.email = "Please enter a valid email address !";
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if(!password) {
+      newErrors.password = "Password is required !";
+    } else if(!passwordRegex.test(password)) {
+      newErrors.password = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character !"
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if(!validateForm()) {
+      return
+    }
+
+    navigate("/api/v1/profile")
+  }
 
   return (
     <div className="fgl-page">
@@ -30,7 +67,7 @@ const Login = () => {
             interview reports.
           </p>
 
-          <form onSubmit={(e) => e.preventDefault()} className="fgl-form">
+          <form onSubmit={handleSubmit} className="fgl-form">
             <div className="fgl-field">
               <label className="fgl-label">EMAIL ADDRESS</label>
               <div className="fgl-input-wrap">
@@ -43,6 +80,7 @@ const Login = () => {
                   className="fgl-input"
                 />
               </div>
+              {errors.email && (<p className="text-red-500">{errors.email}</p>)}
             </div>
 
             <div className="fgl-field">
@@ -70,6 +108,7 @@ const Login = () => {
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
+              {errors.password && (<p className="text-red-500">{errors.password}</p>)}
             </div>
 
             <button type="submit" className="fgl-signin-btn">
