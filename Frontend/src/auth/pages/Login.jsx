@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import "../styles/Login.css";
+import { useAuth } from "../hooks/useAuth.hook.js";
+import Loader from "../components/Loader.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const {loading, handleLogin} = useAuth();
 
   const navigate = useNavigate();
 
@@ -35,14 +38,23 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if(!validateForm()) {
       return
     }
 
-    navigate("/api/v1/profile")
+    const success = await handleLogin({email, password});
+
+    if(success) {
+      navigate("/api/v1/profile")
+    }
+
+  }
+
+  if(loading) {
+    return (<Loader text="Unlocking your account..." />)
   }
 
   return (

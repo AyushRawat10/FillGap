@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { FileText, BarChart3, Eye, EyeOff } from "lucide-react";
 import "../styles/Register.css";
-import { useAuth } from "../hooks/useAuth.hook";
-import Loader from "../components/Loader";
+import { useAuth } from "../hooks/useAuth.hook.js";
+import Loader from "../components/Loader.jsx";
 
 const Register = () => {
   const [username, setUsername] = useState("");
