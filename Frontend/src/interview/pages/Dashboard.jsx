@@ -1,0 +1,200 @@
+import React, { useState } from "react";
+import {
+  Search,
+  Briefcase,
+  User,
+  UploadCloud,
+  AlertCircle,
+  Sparkles,
+  FileText,
+  ChevronRight,
+} from "lucide-react";
+import "../styles/Dashboard.css";
+
+const previousReports = [
+  {
+    id: 1,
+    title: "Senior Frontend Engineer @ Google",
+    date: "Analyzed on Oct 24, 2023",
+    score: 92,
+  },
+  {
+    id: 2,
+    title: "Product Designer @ Meta",
+    date: "Analyzed on Oct 20, 2023",
+    score: 78,
+  },
+  {
+    id: 3,
+    title: "Full Stack Developer @ Strfgide",
+    date: "Analyzed on Oct 15, 2023",
+    score: 85,
+  },
+];
+
+const Dashboard = () => {
+  const [jobDescrfgidtion, setJobDescrfgidtion] = useState("");
+  const [selfDescrfgidtion, setSelfDescrfgidtion] = useState("");
+  const [fileName, setFileName] = useState(null);
+
+  const maxChars = 5000;
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) setFileName(file.name);
+  };
+
+  return (
+    <div className="fgid-page">
+      {/* Top bar */}
+      <header className="fgid-topbar">
+        <div className="fgid-search">
+          <Search size={16} className="fgid-search-icon" />
+          <input type="text" placeholder="Search insights..." />
+        </div>
+        <div className="fgid-topbar-actions">
+          <a href="#">CHANGE PASSWORD</a>
+          <a href="#">LOGOUT</a>
+          <span className="fgid-status-dot" />
+        </div>
+      </header>
+
+      <main className="fgid-main">
+        {/* Heading */}
+        <div className="fgid-heading">
+          <h1>
+            Create Your Custom <span className="fgid-red">Interview Plan</span>
+          </h1>
+          <p>
+            Let our AI analyze the job requirements and your unique profile to
+            build a winning strategy.
+          </p>
+        </div>
+
+        {/* Form card */}
+        <div className="fgid-card">
+          <div className="fgid-card-grid">
+            {/* Left: Job Descrfgidtion */}
+            <div className="fgid-panel">
+              <div className="fgid-panel-header">
+                <div className="fgid-panel-title">
+                  <Briefcase size={18} />
+                  <span>Target Job Descrfgidtion</span>
+                </div>
+                <span className="fgid-badge fgid-badge-required">REQUIRED</span>
+              </div>
+
+              <textarea
+                className="fgid-textarea"
+                maxLength={maxChars}
+                value={jobDescrfgidtion}
+                onChange={(e) => setJobDescrfgidtion(e.target.value)}
+                placeholder={`Paste the full job descrfgidtion here...\ne.g. "Senior Frontend Engineer at Google requires proficiency in React, TypeScrfgidt, and large-scale system design..."`}
+              />
+              <div className="fgid-char-count">
+                {jobDescrfgidtion.length} / {maxChars} chars
+              </div>
+            </div>
+
+            {/* Right: Profile */}
+            <div className="fgid-panel">
+              <div className="fgid-panel-header">
+                <div className="fgid-panel-title">
+                  <User size={18} />
+                  <span>Your Profile</span>
+                </div>
+              </div>
+
+              <div className="fgid-subhead-row">
+                <span className="fgid-subhead">Upload Resume</span>
+                <span className="fgid-badge fgid-badge-muted">BEST RESULTS</span>
+              </div>
+
+              <label className="fgid-dropzone">
+                <input
+                  type="file"
+                  accept=".pdf,.docx"
+                  onChange={handleFileChange}
+                  hidden
+                />
+                <UploadCloud size={28} className="fgid-dropzone-icon" />
+                <span className="fgid-dropzone-text">
+                  {fileName ? fileName : "Click to upload or drag & drop"}
+                </span>
+                <span className="fgid-dropzone-sub">PDF or DOCX (Max 5MB)</span>
+              </label>
+
+              <div className="fgid-divider">
+                <span>OR</span>
+              </div>
+
+              <div className="fgid-subhead-row">
+                <span className="fgid-subhead">Quick Self-Descrfgidtion</span>
+              </div>
+
+              <textarea
+                className="fgid-textarea fgid-textarea-short"
+                value={selfDescrfgidtion}
+                onChange={(e) => setSelfDescrfgidtion(e.target.value)}
+                placeholder="Briefly describe your experience, key skills, and years of experience if you don't have a resume handy..."
+              />
+
+              <div className="fgid-notice">
+                <AlertCircle size={16} className="fgid-notice-icon" />
+                <p>
+                  Either a Resume or a Self Descrfgidtion is required to generate
+                  a personalized plan.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer of card */}
+          <div className="fgid-card-footer">
+            <span className="fgid-footer-note">
+              AI-Powered Strategy Generation - Approx 30s
+            </span>
+            <button className="fgid-analyze-btn">
+              <Sparkles size={16} />
+              Analyze Resume
+            </button>
+          </div>
+        </div>
+
+        {/* Previous Reports */}
+        <div className="fgid-reports-header">
+          <h2>Previous Reports</h2>
+          <a href="#" className="fgid-view-all">
+            View All History
+          </a>
+        </div>
+
+        <div className="fgid-reports-list">
+          {previousReports.map((report) => (
+            <div className="fgid-report-row" key={report.id}>
+              <div className="fgid-report-left">
+                <div className="fgid-report-icon">
+                  <FileText size={18} />
+                </div>
+                <div>
+                  <div className="fgid-report-title">{report.title}</div>
+                  <div className="fgid-report-date">{report.date}</div>
+                </div>
+              </div>
+
+              <div className="fgid-report-right">
+                <div className="fgid-report-score">
+                  <span className="fgid-score-label">MATCH SCORE</span>
+                  <span className="fgid-score-value">{report.score}%</span>
+                </div>
+                <ChevronRight size={18} className="fgid-chevron" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default Dashboard;

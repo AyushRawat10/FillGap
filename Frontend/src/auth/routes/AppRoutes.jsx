@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router";
 import Login from "../pages/Login.jsx";
 import Register from "../pages/Register.jsx";
 import Landing from "../pages/Landing.jsx";
-import Profile from "../pages/Profile.jsx";
 import Loader from "../components/Loader.jsx";
+import Dashboard from "../../interview/pages/Dashboard.jsx";
 
 const AppRoutes = () => {
   return (
@@ -13,7 +13,7 @@ const AppRoutes = () => {
       <Route path="/api/v1/auth/register" element={<Register />} />
       <Route path="/api/v1/auth/login" element={<Login />} />
       <Route path="/loading" element={<Loader />} />
-      <Route path="/api/v1/profile" element={<Profile />} />
+      <Route path="/api/v1/interview/dashboard" element={<Dashboard />} />
     </Routes>
   );
 };
