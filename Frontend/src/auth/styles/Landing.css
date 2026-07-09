@@ -20,9 +20,9 @@
 
 .fgland-logo {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
   color: #f4a58a;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;;
 }
 
 .fgland-nav-actions {
@@ -40,12 +40,16 @@
   padding: 9px 22px;
   border-radius: 6px;
   cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
 .fgland-btn-outline:hover {
   border-color: #f4623a;
   background-color: rgba(244, 98, 58, 0.08);
+}
+
+.fgland-btn-outline:active {
+  transform: scale(0.95);
 }
 
 .fgland-btn-primary {
@@ -57,11 +61,15 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .fgland-btn-primary:hover {
   background-color: #b81717;
+}
+
+.fgland-btn-primary:active {
+  transform: scale(0.95)
 }
 
 /* Hero */
@@ -131,11 +139,15 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .fgland-cta-primary:hover {
   background-color: #b81717;
+}
+
+.fgland-cta-primary:active {
+  transform: scale(0.95);
 }
 
 .fgland-cta-secondary {

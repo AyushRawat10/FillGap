@@ -23,7 +23,7 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #f4a58a;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;;
 }
 
 .fgr-nav-actions {
@@ -44,19 +44,23 @@
 }
 
 .fgr-btn-primary {
-  background-color: #f4623a;
-  color: #1a0f0a;
+  background-color: #d81f1f;
+  color: #ffffff;
   font-weight: 600;
   font-size: 14px;
   padding: 8px 20px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .fgr-btn-primary:hover {
-  background-color: #e5552e;
+  background-color: #b81717;
+}
+
+.fgr-btn-primary:active {
+  transform: scale(0.95);
 }
 
 /* Main */
@@ -259,11 +263,15 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .fgr-submit-btn:hover {
   background-color: #c81818;
+}
+
+.fgr-submit-btn:active {
+  transform: scale(0.95);
 }
 
 .fgr-footer-text {

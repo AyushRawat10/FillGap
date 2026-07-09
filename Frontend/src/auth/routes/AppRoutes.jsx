@@ -5,6 +5,8 @@ import Register from "../pages/Register.jsx";
 import Landing from "../pages/Landing.jsx";
 import Loader from "../components/Loader.jsx";
 import Dashboard from "../../interview/pages/Dashboard.jsx";
+import Report from "../../interview/pages/Report.jsx";
+import MainLayout from "../../interview/layouts/MainLayout.jsx";
 
 const AppRoutes = () => {
   return (
@@ -13,7 +15,10 @@ const AppRoutes = () => {
       <Route path="/api/v1/auth/register" element={<Register />} />
       <Route path="/api/v1/auth/login" element={<Login />} />
       <Route path="/loading" element={<Loader />} />
-      <Route path="/api/v1/interview/dashboard" element={<Dashboard />} />
+      <Route element={<MainLayout/>}>
+        <Route path="/api/v1/interview/dashboard" element={<Dashboard />} />
+        <Route path="/api/v1/interview/report" element={<Report />} />
+      </Route>
     </Routes>
   );
 };

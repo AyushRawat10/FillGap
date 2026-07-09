@@ -23,7 +23,7 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #f4a58a;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;;
 }
 
 .fgl-nav-actions {
@@ -44,19 +44,23 @@
 }
 
 .fgl-btn-primary {
-  background-color: #f4623a;
-  color: #1a0f0a;
+  background-color: #d81f1f;
+  color: #ffffff;
   font-weight: 600;
   font-size: 14px;
   padding: 8px 20px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .fgl-btn-primary:hover {
-  background-color: #e5552e;
+  background-color: #b81717;
+}
+
+.fgl-btn-primary:active {
+  transform: scale(0.95);
 }
 
 /* Main */
@@ -185,8 +189,8 @@
 
 .fgl-signin-btn {
   margin-top: 4px;
-  background-color: #f4623a;
-  color: #1a0f0a;
+  background-color: #e11d1d;
+  color: #ffffff;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.5px;
@@ -194,11 +198,15 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .fgl-signin-btn:hover {
-  background-color: #e5552e;
+  background-color: #c81818;
+}
+
+.fgl-signin-btn:active {
+  transform: scale(0.95)
 }
 
 /* Divider */

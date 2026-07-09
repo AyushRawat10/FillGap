@@ -11,27 +11,6 @@ import {
 } from "lucide-react";
 import "../styles/Dashboard.css";
 
-const previousReports = [
-  {
-    id: 1,
-    title: "Senior Frontend Engineer @ Google",
-    date: "Analyzed on Oct 24, 2023",
-    score: 92,
-  },
-  {
-    id: 2,
-    title: "Product Designer @ Meta",
-    date: "Analyzed on Oct 20, 2023",
-    score: 78,
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer @ Strfgide",
-    date: "Analyzed on Oct 15, 2023",
-    score: 85,
-  },
-];
-
 const Dashboard = () => {
   const [jobDescrfgidtion, setJobDescrfgidtion] = useState("");
   const [selfDescrfgidtion, setSelfDescrfgidtion] = useState("");
@@ -47,17 +26,6 @@ const Dashboard = () => {
   return (
     <div className="fgid-page">
       {/* Top bar */}
-      <header className="fgid-topbar">
-        <div className="fgid-search">
-          <Search size={16} className="fgid-search-icon" />
-          <input type="text" placeholder="Search insights..." />
-        </div>
-        <div className="fgid-topbar-actions">
-          <a href="#">CHANGE PASSWORD</a>
-          <a href="#">LOGOUT</a>
-          <span className="fgid-status-dot" />
-        </div>
-      </header>
 
       <main className="fgid-main">
         {/* Heading */}
@@ -162,36 +130,7 @@ const Dashboard = () => {
         </div>
 
         {/* Previous Reports */}
-        <div className="fgid-reports-header">
-          <h2>Previous Reports</h2>
-          <a href="#" className="fgid-view-all">
-            View All History
-          </a>
-        </div>
-
-        <div className="fgid-reports-list">
-          {previousReports.map((report) => (
-            <div className="fgid-report-row" key={report.id}>
-              <div className="fgid-report-left">
-                <div className="fgid-report-icon">
-                  <FileText size={18} />
-                </div>
-                <div>
-                  <div className="fgid-report-title">{report.title}</div>
-                  <div className="fgid-report-date">{report.date}</div>
-                </div>
-              </div>
-
-              <div className="fgid-report-right">
-                <div className="fgid-report-score">
-                  <span className="fgid-score-label">MATCH SCORE</span>
-                  <span className="fgid-score-value">{report.score}%</span>
-                </div>
-                <ChevronRight size={18} className="fgid-chevron" />
-              </div>
-            </div>
-          ))}
-        </div>
+        
       </main>
     </div>
   );
