@@ -1,0 +1,353 @@
+* {
+  box-sizing: border-box;
+}
+
+.fgir-dash-page {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0d0806;
+  color: #f2e9e4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Nav */
+
+
+/* Body layout */
+.fgir-dash-body {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr) 300px;
+  gap: 24px;
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.fgir-sidebar-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #6b5c54;
+  margin-bottom: 16px;
+}
+
+/* Left sidebar */
+.fgir-sidebar {
+  background-color: #150d0a;
+  border: 1px solid #2a1b16;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.fgir-sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fgir-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  color: #b3a39b;
+  font-size: 14px;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.fgir-sidebar-item:hover {
+  background-color: #1a110d;
+  color: #f2e9e4;
+}
+
+.fgir-sidebar-item-active {
+  background-color: rgba(225, 29, 29, 0.1);
+  border: 1px solid #4a2018;
+  color: #f4623a;
+  font-weight: 600;
+}
+
+.fgir-sidebar-item-active:hover {
+  background-color: rgba(225, 29, 29, 0.14);
+  color: #f4623a;
+}
+
+/* Center content */
+.fgir-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.fgir-card {
+  background-color: #150d0a;
+  border: 1px solid #2a1b16;
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.fgir-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #e11d1d;
+  margin: 0 0 24px;
+}
+
+.fgir-score-box-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.fgir-score-box {
+  width: 240px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: radial-gradient(circle at 50% 40%, rgba(225, 29, 29, 0.12), transparent 70%);
+  border: 1px solid #2a1b16;
+  border-radius: 50%;
+}
+
+.fgir-score-value {
+  font-size: 64px;
+  font-weight: 800;
+  color: #f2e9e4;
+  line-height: 1;
+}
+
+.fgir-score-percent {
+  font-size: 32px;
+  color: #e11d1d;
+  font-weight: 700;
+}
+
+.fgir-score-caption {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #6b5c54;
+}
+
+.fgir-score-heading {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.fgir-score-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #b3a39b;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Skill gaps */
+.fgir-gap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fgir-gap-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: #0d0806;
+  border: 1px solid #2a1b16;
+  border-radius: 10px;
+  padding: 18px 20px;
+  flex-wrap: wrap;
+}
+
+.fgir-gap-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.fgir-gap-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(225, 29, 29, 0.1);
+  border-radius: 8px;
+  color: #e11d1d;
+}
+
+.fgir-gap-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.fgir-gap-desc {
+  font-size: 13px;
+  color: #6b5c54;
+  margin-top: 2px;
+}
+
+.fgir-priority-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.fgir-priority-high {
+  background-color: rgba(225, 29, 29, 0.15);
+  color: #f4623a;
+  border: 1px solid #4a2018;
+}
+
+.fgir-priority-medium {
+  background-color: #1a110d;
+  color: #b3a39b;
+  border: 1px solid #2a1b16;
+}
+
+/* Right sidebar - reports */
+/* Right sidebar - roadmap path */
+.fgir-reports {
+  background-color: #150d0a;
+  border: 1px solid #2a1b16;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.fgir-roadmap-path {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.fgir-roadmap-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.fgir-roadmap-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.fgir-roadmap-line {
+  width: 2px;
+  flex: 1;
+  min-height: 22px;
+  background-color: #2a1b16;
+  margin: 2px 0;
+}
+
+.fgir-roadmap-icon-done {
+  color: #e11d1d;
+}
+
+.fgir-roadmap-icon-current {
+  color: #f4623a;
+}
+
+.fgir-roadmap-icon-upcoming {
+  color: #3a2a22;
+}
+
+.fgir-roadmap-title {
+  font-size: 13px;
+  padding-top: 1px;
+  padding-bottom: 20px;
+}
+
+.fgir-roadmap-title-done {
+  color: #b3a39b;
+}
+
+.fgir-roadmap-title-current {
+  color: #f2e9e4;
+  font-weight: 600;
+}
+
+.fgir-roadmap-title-upcoming {
+  color: #6b5c54;
+}
+
+.fgir-view-all-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #1a110d;
+  border: 1px solid #2a1b16;
+  color: #f2e9e4;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.fgir-view-all-btn:hover {
+  background-color: #20150f;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .fgir-dash-body {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .fgir-reports {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .fgir-dash-body {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .fgir-dash-nav {
+    padding: 16px 20px;
+  }
+
+  .fgir-dash-left {
+    gap: 20px;
+  }
+
+  .fgir-score-box {
+    width: 100%;
+    max-width: 280px;
+    height: 200px;
+  }
+
+  .fgir-score-value {
+    font-size: 48px;
+  }
+
+  .fgir-card {
+    padding: 22px;
+  }
+}
