@@ -1,14 +1,31 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { getMe } from "../services/auth.service.js";
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(false)
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    return (
-        <AuthContext.Provider value={{user, setUser, loading, setLoading}}>
-            {children}
-        </AuthContext.Provider>
-    )
-}
+  useEffect(() => {
+    const getAndSetUser = async () => {
+      try {
+        const data = await getMe();
+        setUser(data);
+      } catch (error) {
+        console.log("User not logged in : ", error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getAndSetUser();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

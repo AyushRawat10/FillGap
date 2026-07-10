@@ -4,6 +4,7 @@ import {
   registerUser,
   loginUser,
   logoutUser,
+  getMe
 } from "../services/auth.service.js";
 
 export const useAuth = () => {
@@ -17,7 +18,7 @@ export const useAuth = () => {
       setUser(data.user);
       return true;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return false;
     } finally {
       setLoading(false);
@@ -39,16 +40,16 @@ export const useAuth = () => {
   };
 
   const handleLogout = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-        const data = await logoutUser()
-        setUser(null)
+      const data = await logoutUser();
+      setUser(null);
     } catch (error) {
-        
-    } finally {
-        setLoading(false);
-    }
-  }
 
-  return {user, loading, handleRegister, handleLogin, handleLogout}
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { user, loading, handleRegister, handleLogin, handleLogout };
 };
