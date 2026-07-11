@@ -1,97 +1,133 @@
 import mongoose, { Schema } from "mongoose";
 
-const technicalQuestion = new Schema({
-    question: {
-        type: String,
-        required: true
+const matchScore = new Schema(
+    {
+        accuracy: {
+            type: Number,
+            required: true,
+        },
+        matchScoreTitle: {
+            type: String,
+            required: true,
+        },
+        matchScoreDescription: {
+            type: String,
+            required: true,
+        },
     },
-    intention: {
-        type: String,
-        required: true
-    },
-    answer: {
-        type: String,
-        required: true
+    {
+        _id: false,
     }
-}, {
-    _id: false
-})
+);
 
-const behaviourQuestion = new Schema({
-    question: {
-        type: String,
-        required: true
+const technicalQuestion = new Schema(
+    {
+        question: {
+            type: String,
+            required: true,
+        },
+        intention: {
+            type: String,
+            required: true,
+        },
+        answer: {
+            type: String,
+            required: true,
+        },
     },
-    intention: {
-        type: String,
-        required: true
-    },
-    answer: {
-        type: String,
-        required: true
+    {
+        _id: false,
     }
-}, {
-    _id: false
-})
+);
 
-const skillGap = new Schema({
-    lucideIcon: {
-        type: String,
-        required: true
+const behaviourQuestion = new Schema(
+    {
+        question: {
+            type: String,
+            required: true,
+        },
+        intention: {
+            type: String,
+            required: true,
+        },
+        answer: {
+            type: String,
+            required: true,
+        },
     },
-    skill: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    severity: {
-        type: String,
-        enum: ["danger", "medium", "high priority"],
-        required: true
+    {
+        _id: false,
     }
-}, {
-    _id: false
-})
+);
 
-const roadmap = new Schema({
-    day: {
-        type: Number,
-        required: true
+const skillGap = new Schema(
+    {
+        lucideIcon: {
+            type: String,
+            required: true,
+        },
+        skill: {
+            type: String,
+            required: true,
+        },
+        description: {
+            type: String,
+            required: true,
+        },
+        severity: {
+            type: String,
+            enum: ["danger", "medium", "high priority"],
+            required: true,
+        },
     },
-    topic: {
-        type: String,
-        required: true
-    },
-    advice: {
-        type: String,
-        required: true
+    {
+        _id: false,
     }
-}, {
-    _id: false
-})
+);
+
+const roadmap = new Schema(
+    {
+        day: {
+            type: Number,
+            required: true,
+        },
+        topic: {
+            type: String,
+            required: true,
+        },
+        advice: {
+            type: String,
+            required: true,
+        },
+    },
+    {
+        _id: false,
+    }
+);
 
 const interviewReportSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
     jobDescription: {
         type: String,
-        required: [true, "Job description is required."]
-    }, 
+        required: [true, "Job description is required."],
+    },
     resume: {
-        type: String
+        type: String,
     },
     selfDescription: {
-        type: String
+        type: String,
     },
-    matchScore: {
-        type: Number,
-        required: true
-    },
-    technicalQuestion: [technicalQuestion],
-    behaviourQuestion: [behaviourQuestion],
-    skillGap: [skillGap],
-    roadmap: [roadmap]
-})
+    matchScore: matchScore,
+    technicalQuestions: [technicalQuestion],
+    behavioralQuestions: [behaviourQuestion],
+    skillGaps: [skillGap],
+    roadmap: [roadmap],
+});
 
-const InterviewReport = mongoose.model("InterviewReport", interviewReportSchema)
+export const InterviewReport = mongoose.model(
+    "InterviewReport",
+    interviewReportSchema
+);

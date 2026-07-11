@@ -1,8 +1,6 @@
 import dotenv from "dotenv";
 import app from "./src/app.js";
 import connectDB from "./src/database/db.database.js";
-import { generateInterviewReport } from "./src/services/ai.service.js";
-import {jobDescription, resume, selfDescription} from "./src/services/temp.js";
 
 dotenv.config({
     path: "./.env",
