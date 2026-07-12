@@ -8,7 +8,7 @@ const getClient = () => {
             apiKey: process.env.GEMINI_API_KEY,
         });
     }
-    
+
     return ai;
 };
 
@@ -17,7 +17,8 @@ const interviewJsonSchema = {
     properties: {
         title: {
             type: "string",
-            description: "A title that summarizes the overall assessment of the candidate's suitability for the job based on the analysis of the job description, resume, and self-description.",
+            description:
+                "A title that concisely and attention-grabbingly summarizes the candidate's overall job-fit assessment (max 5 words).",
         },
         matchScore: {
             type: "object",
@@ -97,8 +98,15 @@ const interviewJsonSchema = {
                 properties: {
                     lucideIcon: {
                         type: "string",
+                        enum: [
+                            "code",
+                            "server",
+                            "database",
+                            "cloud",
+                            "security",
+                        ],
                         description:
-                            "The Lucide icon representing the skill gap, providing some common five lucide icons for reference. For example, 'code' for programming skills, 'server' for backend development, 'database' for database management, 'cloud' for cloud computing, and 'security' for cybersecurity.",
+                            "The Lucide icon representing the skill gap. Use 'code' for programming skills, 'server' for backend development, 'database' for database management, 'cloud' for cloud computing, and 'security' for cybersecurity.",
                     },
                     skill: {
                         type: "string",
@@ -108,12 +116,12 @@ const interviewJsonSchema = {
                     description: {
                         type: "string",
                         description:
-                            "A brief description that explains the skill gap in more detail, highlighting the areas where the candidate may need improvement or further development.",
+                            "A brief description explaining the skill gap, no more than 10 words.",
                     },
                     severity: {
                         type: "string",
                         description:
-                            "The severity of the skill gap, indicating how critical it is for the candidate's success in the role. It can be categorized as 'danger', 'medium', or 'high priority'.",
+                            "The severity of the skill gap, indicating how critical it is for the candidate's success in the role. It can be categorized as 'LOW', 'MEDIUM', or 'HIGH'.",
                     },
                 },
                 required: ["lucideIcon", "skill", "description", "severity"],
@@ -160,13 +168,13 @@ export const generateInterviewReport = async ({
     resume,
     selfDescription,
 }) => {
+    const client = getClient();
 
-    const client = getClient()
-
-    const candidateInfoList = []
-    if(resume) candidateInfoList.push(`Resume: ${resume}`)
-    if(selfDescription) candidateInfoList.push(`Self Description: ${selfDescription}`)
-    const candidateInfo = candidateInfoList.join("\n")
+    const candidateInfoList = [];
+    if (resume) candidateInfoList.push(`Resume: ${resume}`);
+    if (selfDescription)
+        candidateInfoList.push(`Self Description: ${selfDescription}`);
+    const candidateInfo = candidateInfoList.join("\n");
 
     const prompt = `You are an expert in analyzing job descriptions, resumes, and self-descriptions to provide a comprehensive interview report. Your task is to generate a detailed report based on the provided job description, resume, and self-description. The report should include the following sections:
 1. Match Score: Evaluate how well the candidate's resume and self-description match the job description. Provide a score from 0 to 100, along with a title and a brief description explaining the score.
@@ -191,6 +199,6 @@ Please provide the report in JSON format, adhering to the following schema: ${JS
     const interviewReportProvider = interviewJsonSchemaZod.parse(
         JSON.parse(interviewReportService.output_text)
     );
-    
+
     return interviewReportProvider;
 };

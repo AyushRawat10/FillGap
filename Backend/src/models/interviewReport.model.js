@@ -76,7 +76,7 @@ const skillGap = new Schema(
         },
         severity: {
             type: String,
-            enum: ["danger", "medium", "high priority"],
+            enum: ["LOW", "MEDIUM", "HIGH"],
             required: true,
         },
     },

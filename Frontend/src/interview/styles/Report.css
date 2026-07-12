@@ -75,7 +75,7 @@
 
 .fgir-sidebar-item-active:hover {
   background-color: rgba(225, 29, 29, 0.14);
-  color: #f4623a;
+  color: #ff7954;
 }
 
 /* Center content */
@@ -224,6 +224,114 @@
   border: 1px solid #2a1b16;
 }
 
+.fgir-priority-low {
+  background-color: #0d1a11;
+  color: #93af9c;
+  border: 1px solid #18311e;
+}
+
+.fgir-question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fgir-question-card {
+  background-color: #12090a;
+  border: 1px solid #2a1414;
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+.fgir-question-header {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.fgir-question-number {
+  flex-shrink: 0;
+  background-color: #3a1414;
+  color: #ff6b6b;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.fgir-question-text {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #f0e6e6;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.fgir-question-intention,
+.fgir-question-answer {
+  margin-top: 10px;
+}
+
+.fgir-question-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #8a6f6f;
+  margin-bottom: 4px;
+}
+
+.fgir-question-intention p,
+.fgir-question-answer p {
+  font-size: 13.5px;
+  color: #b3a39b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.fgir-full-roadmap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fgir-full-roadmap-card {
+  display: flex;
+  gap: 16px;
+  background-color: #12090a;
+  border: 1px solid #2a1414;
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+.fgir-full-roadmap-day {
+  flex-shrink: 0;
+  align-self: flex-start;
+  background-color: #3a1414;
+  color: #ff6b6b;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.fgir-full-roadmap-topic {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #f0e6e6;
+  margin: 0 0 6px 0;
+}
+
+.fgir-full-roadmap-advice {
+  font-size: 13.5px;
+  color: #b3a39b;
+  line-height: 1.5;
+  margin: 0;
+}
+
 /* Right sidebar - reports */
 /* Right sidebar - roadmap path */
 .fgir-reports {
@@ -260,16 +368,8 @@
   margin: 2px 0;
 }
 
-.fgir-roadmap-icon-done {
-  color: #e11d1d;
-}
-
 .fgir-roadmap-icon-current {
   color: #f4623a;
-}
-
-.fgir-roadmap-icon-upcoming {
-  color: #3a2a22;
 }
 
 .fgir-roadmap-title {
@@ -278,17 +378,9 @@
   padding-bottom: 20px;
 }
 
-.fgir-roadmap-title-done {
-  color: #b3a39b;
-}
-
 .fgir-roadmap-title-current {
   color: #f2e9e4;
   font-weight: 600;
-}
-
-.fgir-roadmap-title-upcoming {
-  color: #6b5c54;
 }
 
 .fgir-view-all-btn {

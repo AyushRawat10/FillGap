@@ -51,7 +51,9 @@ const generateReport = asyncHandler(async (req, res) => {
 const getReportById = asyncHandler(async (req, res) => {
     const { interviewReportId } = req.params
 
-    const interviewReport = await InterviewReport.findById(interviewReportId)
+    const interviewReport = await InterviewReport.findById(interviewReportId).select(
+        "-jobDescription -resume -selfDescription"
+    )
 
     if(!interviewReport) {
         throw new ApiError(404, "Interview report not found !")

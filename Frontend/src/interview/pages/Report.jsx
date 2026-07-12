@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Code2,
   MessageSquare,
@@ -11,8 +11,14 @@ import {
   CheckCircle2,
   Circle,
   CircleDot,
+  Code,
+  Server,
+  Cloud,
 } from "lucide-react";
 import "../styles/Report.css";
+import { useInterview } from "../hooks/useInterview.hook.js";
+import Loader from "../../auth/components/Loader.jsx";
+import { useParams } from "react-router";
 
 const sections = [
   { id: "match-score", label: "Match Score", icon: CircleGauge },
@@ -21,43 +27,35 @@ const sections = [
   { id: "behavioral", label: "Behavioral Questions", icon: MessageSquare },
 ];
 
-const skillGaps = [
-  {
-    id: 1,
-    icon: Target,
-    title: "Microservices Architecture",
-    desc: "Identified during System Design interview",
-    priority: "HIGH PRIORITY",
-    priorityClass: "fgir-priority-high",
-  },
-  {
-    id: 2,
-    icon: ShieldAlert,
-    title: "OAuth 2.0 / OpenID Connect",
-    desc: "Gap noted in Security module",
-    priority: "MEDIUM",
-    priorityClass: "fgir-priority-medium",
-  },
-  {
-    id: 3,
-    icon: Database,
-    title: "NoSQL Aggregation Pipelines",
-    desc: "Based on your Technical Q1 performance",
-    priority: "MEDIUM",
-    priorityClass: "fgir-priority-medium",
-  },
-];
-
-const roadmapSteps = [
-  { id: 1, title: "Core Fundamentals", status: "done" },
-  { id: 2, title: "System Design Basics", status: "done" },
-  { id: 3, title: "Microservices Architecture", status: "current" },
-  { id: 4, title: "Security & OAuth", status: "upcoming" },
-  { id: 5, title: "Mock Interview Round", status: "upcoming" },
-];
-
 const Report = () => {
+  const {reportId} = useParams()
   const [activeSection, setActiveSection] = useState("match-score");
+  const { loading, report, handleToGetReportById } = useInterview();
+  console.log(report);
+
+  useEffect(() => {
+    if(reportId) {
+      handleToGetReportById(reportId)
+    }
+  }, [reportId])
+
+  if (loading || !report) {
+    return <Loader text="Loading your report..." />;
+  }
+
+  const iconMap = {
+    code: Code,
+    server: Server,
+    database: Database,
+    cloud: Cloud,
+    security: ShieldAlert,
+  };
+
+  const priorityMap = {
+    HIGH: "fgir-priority-high",
+    MEDIUM: "fgir-priority-medium",
+    LOW: "fgir-priority-low",
+  };
 
   return (
     <div className="fgir-dash-page">
@@ -92,17 +90,18 @@ const Report = () => {
               <div className="fgir-score-box-wrap">
                 <div className="fgir-score-box">
                   <span className="fgir-score-value">
-                    85<span className="fgir-score-percent">%</span>
+                    {report.matchScore.accuracy}
+                    <span className="fgir-score-percent">%</span>
                   </span>
                   <span className="fgir-score-caption">ROLE FIT</span>
                 </div>
               </div>
 
-              <h3 className="fgir-score-heading">Strong Alignment</h3>
+              <h3 className="fgir-score-heading">
+                {report.matchScore.matchScoreTitle}
+              </h3>
               <p className="fgir-score-desc">
-                Your profile shows strong alignment with Senior Backend
-                Developer roles. Improving system design depth could
-                increase your score to 92%.
+                {report.matchScore.matchScoreDescription}
               </p>
             </div>
           )}
@@ -112,21 +111,23 @@ const Report = () => {
               <h2 className="fgir-card-title">Skill Gaps</h2>
 
               <div className="fgir-gap-list">
-                {skillGaps.map((gap) => {
-                  const Icon = gap.icon;
+                {report.skillGaps.map((gap, index) => {
+                  const Icon = iconMap[gap.lucideIcon] ?? Target;
+                  const priorityClass =
+                    priorityMap[gap.severity] ?? "fgir-priority-medium";
                   return (
-                    <div className="fgir-gap-row" key={gap.id}>
+                    <div className="fgir-gap-row" key={index + 1}>
                       <div className="fgir-gap-left">
                         <div className="fgir-gap-icon">
                           <Icon size={20} />
                         </div>
                         <div>
-                          <div className="fgir-gap-title">{gap.title}</div>
-                          <div className="fgir-gap-desc">{gap.desc}</div>
+                          <div className="fgir-gap-title">{gap.skill}</div>
+                          <div className="fgir-gap-desc">{gap.description}</div>
                         </div>
                       </div>
-                      <span className={`fgir-priority-badge ${gap.priorityClass}`}>
-                        {gap.priority}
+                      <span className={`fgir-priority-badge ${priorityClass}`}>
+                        {gap.severity}
                       </span>
                     </div>
                   );
@@ -138,18 +139,78 @@ const Report = () => {
           {activeSection === "technical" && (
             <div className="fgir-card">
               <h2 className="fgir-card-title">Technical Questions</h2>
-              <p className="fgir-score-desc" style={{ margin: 0, textAlign: "left" }}>
-                Your technical interview questions will appear here.
-              </p>
+              <div className="fgir-question-list">
+                {report.technicalQuestions.map((element, index) => (
+                  <div className="fgir-question-card" key={index}>
+                    <div className="fgir-question-header">
+                      <span className="fgir-question-number">Q{index + 1}</span>
+                      <p className="fgir-question-text">{element.question}</p>
+                    </div>
+
+                    <div className="fgir-question-intention">
+                      <span className="fgir-question-label">
+                        Why this is asked
+                      </span>
+                      <p>{element.intention}</p>
+                    </div>
+
+                    <div className="fgir-question-answer">
+                      <span className="fgir-question-label">
+                        Suggested Answer
+                      </span>
+                      <p>{element.answer}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
           {activeSection === "behavioral" && (
             <div className="fgir-card">
               <h2 className="fgir-card-title">Behavioral Questions</h2>
-              <p className="fgir-score-desc" style={{ margin: 0, textAlign: "left" }}>
-                Your behavioral interview questions will appear here.
-              </p>
+              <div className="fgir-question-list">
+                {report.behavioralQuestions.map((element, index) => (
+                  <div className="fgir-question-card" key={index}>
+                    <div className="fgir-question-header">
+                      <span className="fgir-question-number">Q{index + 1}</span>
+                      <p className="fgir-question-text">{element.question}</p>
+                    </div>
+
+                    <div className="fgir-question-intention">
+                      <span className="fgir-question-label">
+                        Why this is asked
+                      </span>
+                      <p>{element.intention}</p>
+                    </div>
+
+                    <div className="fgir-question-answer">
+                      <span className="fgir-question-label">
+                        Suggested Answer
+                      </span>
+                      <p>{element.answer}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeSection === "full-roadmap" && (
+            <div className="fgir-card">
+              <h2 className="fgir-card-title">Full Roadmap</h2>
+
+              <div className="fgir-full-roadmap-list">
+                {report.roadmap.map((step, index) => (
+                  <div className="fgir-full-roadmap-card" key={index}>
+                    <div className="fgir-full-roadmap-day">Day {step.day}</div>
+                    <div className="fgir-full-roadmap-body">
+                      <h3 className="fgir-full-roadmap-topic">{step.topic}</h3>
+                      <p className="fgir-full-roadmap-advice">{step.advice}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </main>
@@ -159,35 +220,32 @@ const Report = () => {
           <div className="fgir-sidebar-label">ROADMAP</div>
 
           <div className="fgir-roadmap-path">
-            {roadmapSteps.map((step, index) => {
-              const isLast = index === roadmapSteps.length - 1;
-              const StatusIcon =
-                step.status === "done"
-                  ? CheckCircle2
-                  : step.status === "current"
-                  ? CircleDot
-                  : Circle;
+            {report.roadmap.map((step, index) => {
+              const isLast = index === report.roadmap.length - 1;
 
               return (
-                <div className="fgir-roadmap-step" key={step.id}>
+                <div className="fgir-roadmap-step" key={index}>
                   <div className="fgir-roadmap-marker">
-                    <StatusIcon
+                    <CircleDot
                       size={18}
-                      className={`fgir-roadmap-icon fgir-roadmap-icon-${step.status}`}
+                      className={`fgir-roadmap-icon fgir-roadmap-icon-current`}
                     />
                     {!isLast && <div className="fgir-roadmap-line" />}
                   </div>
                   <span
-                    className={`fgir-roadmap-title fgir-roadmap-title-${step.status}`}
+                    className={`fgir-roadmap-title fgir-roadmap-title-current`}
                   >
-                    {step.title}
+                    {step.topic}
                   </span>
                 </div>
               );
             })}
           </div>
 
-          <button className="fgir-view-all-btn">
+          <button
+            className="fgir-view-all-btn"
+            onClick={() => setActiveSection("full-roadmap")}
+          >
             <Map size={16} />
             View Full Roadmap
           </button>
