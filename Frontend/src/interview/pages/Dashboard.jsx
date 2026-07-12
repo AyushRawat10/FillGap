@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Search,
   Briefcase,
@@ -10,18 +11,38 @@ import {
   ChevronRight,
 } from "lucide-react";
 import "../styles/Dashboard.css";
+import { useInterview } from "../hooks/useInterview.hook.js";
+import Loader from "../../auth/components/Loader.jsx";
 
 const Dashboard = () => {
-  const [jobDescrfgidtion, setJobDescrfgidtion] = useState("");
-  const [selfDescrfgidtion, setSelfDescrfgidtion] = useState("");
-  const [fileName, setFileName] = useState(null);
+  const [jobDescription, setJobDescription] = useState("");
+  const [selfDescription, setSelfDescription] = useState("");
+  const [resumeFile, setResumeFile] = useState(null);
+
+  const { loading, handleToGenerateInterviewReport } = useInterview();
+
+  const navigate = useNavigate();
 
   const maxChars = 5000;
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
-    if (file) setFileName(file.name);
+    if (file) setResumeFile(file);
   };
+
+  const handleSubmit = async () => {
+    const data = await handleToGenerateInterviewReport({
+      jobDescription,
+      selfDescription,
+      resumeFile,
+    });
+    console.log(data)
+    navigate(`/interview/report/${data._id}`);
+  };
+
+  if(loading) {
+    return <Loader text="Preparing your report..." />
+  }
 
   return (
     <div className="fgid-page">
@@ -55,12 +76,12 @@ const Dashboard = () => {
               <textarea
                 className="fgid-textarea"
                 maxLength={maxChars}
-                value={jobDescrfgidtion}
-                onChange={(e) => setJobDescrfgidtion(e.target.value)}
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
                 placeholder={`Paste the full job descrfgidtion here...\ne.g. "Senior Frontend Engineer at Google requires proficiency in React, TypeScrfgidt, and large-scale system design..."`}
               />
               <div className="fgid-char-count">
-                {jobDescrfgidtion.length} / {maxChars} chars
+                {jobDescription.length} / {maxChars} chars
               </div>
             </div>
 
@@ -75,7 +96,9 @@ const Dashboard = () => {
 
               <div className="fgid-subhead-row">
                 <span className="fgid-subhead">Upload Resume</span>
-                <span className="fgid-badge fgid-badge-muted">BEST RESULTS</span>
+                <span className="fgid-badge fgid-badge-muted">
+                  BEST RESULTS
+                </span>
               </div>
 
               <label className="fgid-dropzone">
@@ -87,7 +110,7 @@ const Dashboard = () => {
                 />
                 <UploadCloud size={28} className="fgid-dropzone-icon" />
                 <span className="fgid-dropzone-text">
-                  {fileName ? fileName : "Click to upload or drag & drop"}
+                  {resumeFile ? resumeFile.name : "Click to upload or drag & drop"}
                 </span>
                 <span className="fgid-dropzone-sub">PDF or DOCX (Max 5MB)</span>
               </label>
@@ -102,16 +125,16 @@ const Dashboard = () => {
 
               <textarea
                 className="fgid-textarea fgid-textarea-short"
-                value={selfDescrfgidtion}
-                onChange={(e) => setSelfDescrfgidtion(e.target.value)}
+                value={selfDescription}
+                onChange={(e) => setSelfDescription(e.target.value)}
                 placeholder="Briefly describe your experience, key skills, and years of experience if you don't have a resume handy..."
               />
 
               <div className="fgid-notice">
                 <AlertCircle size={16} className="fgid-notice-icon" />
                 <p>
-                  Either a Resume or a Self Descrfgidtion is required to generate
-                  a personalized plan.
+                  Either a Resume or a Self Descrfgidtion is required to
+                  generate a personalized plan.
                 </p>
               </div>
             </div>
@@ -122,7 +145,7 @@ const Dashboard = () => {
             <span className="fgid-footer-note">
               AI-Powered Strategy Generation - Approx 30s
             </span>
-            <button className="fgid-analyze-btn">
+            <button className="fgid-analyze-btn" onClick={handleSubmit}>
               <Sparkles size={16} />
               Analyze Resume
             </button>
@@ -130,7 +153,6 @@ const Dashboard = () => {
         </div>
 
         {/* Previous Reports */}
-        
       </main>
     </div>
   );

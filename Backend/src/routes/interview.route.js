@@ -6,7 +6,7 @@ import { generateReport, getAllReports, getReportById } from "../controllers/int
 const router = Router();
 
 router.route("/").post(verifyJWT, upload.single("resume"), generateReport)
-router.route("/report/:reportId").get(verifyJWT, getReportById)
+router.route("/report/:interviewReportId").get(verifyJWT, getReportById)
 router.route("/report").get(verifyJWT, getAllReports)
 
 export default router;

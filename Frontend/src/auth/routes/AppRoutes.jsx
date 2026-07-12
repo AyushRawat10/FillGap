@@ -18,8 +18,8 @@ const AppRoutes = () => {
       <Route path="/loading" element={<Loader />} />
       <Route element={<Protected />}>
         <Route element={<MainLayout />}>
-          <Route path="/api/v1/interview/dashboard" element={<Dashboard />} />
-          <Route path="/api/v1/interview/report" element={<Report />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/interview/report/:reportId" element={<Report />} />
         </Route>
       </Route>
     </Routes>
