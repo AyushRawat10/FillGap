@@ -15,6 +15,10 @@ const getClient = () => {
 const interviewJsonSchema = {
     type: "object",
     properties: {
+        title: {
+            type: "string",
+            description: "A title that summarizes the overall assessment of the candidate's suitability for the job based on the analysis of the job description, resume, and self-description.",
+        },
         matchScore: {
             type: "object",
             properties: {
@@ -159,6 +163,11 @@ export const generateInterviewReport = async ({
 
     const client = getClient()
 
+    const candidateInfoList = []
+    if(resume) candidateInfoList.push(`Resume: ${resume}`)
+    if(selfDescription) candidateInfoList.push(`Self Description: ${selfDescription}`)
+    const candidateInfo = candidateInfoList.join("\n")
+
     const prompt = `You are an expert in analyzing job descriptions, resumes, and self-descriptions to provide a comprehensive interview report. Your task is to generate a detailed report based on the provided job description, resume, and self-description. The report should include the following sections:
 1. Match Score: Evaluate how well the candidate's resume and self-description match the job description. Provide a score from 0 to 100, along with a title and a brief description explaining the score.
 2. Technical Questions: Generate a list of technical questions that are relevant to the job description. For each question, provide the intention behind it and the candidate's answer. 
@@ -166,8 +175,7 @@ export const generateInterviewReport = async ({
 4. Skill Gaps: Identify any skill gaps based on the job description, resume, and self-description. For each skill gap, provide from some common five Lucide icon representing the skill for example ("code": "code", "cloud": "cloud", "security": "security", "server": "server", "database": "database"), a description of the gap, and its severity (danger, medium, or high priority).
 5. Roadmap: Create a roadmap for the candidate to improve their skills and address the identified gaps. For each day in the roadmap, provide the topic to be covered and advice for improvement.
 Job Description: ${jobDescription}
-Resume: ${resume}
-Self Description: ${selfDescription}
+${candidateInfo}
 Please provide the report in JSON format, adhering to the following schema: ${JSON.stringify(interviewJsonSchema, null, 2)}`;
 
     const interviewReportService = await client.interactions.create({

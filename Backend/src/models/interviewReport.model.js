@@ -120,11 +120,17 @@ const interviewReportSchema = new Schema({
     selfDescription: {
         type: String,
     },
+    title: {
+        type: String,
+        required: true
+    },
     matchScore: matchScore,
     technicalQuestions: [technicalQuestion],
     behavioralQuestions: [behaviourQuestion],
     skillGaps: [skillGap],
     roadmap: [roadmap],
+}, {
+    timestamps: true
 });
 
 export const InterviewReport = mongoose.model(
