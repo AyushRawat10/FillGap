@@ -21,7 +21,6 @@ const generateInterviewReport = async ({
     },
   });
 
-  console.log(response.data);
   return response.data;
 };
 
@@ -30,14 +29,12 @@ const getInterviewReportById = async (reportId) => {
     `/api/v1/interview/report/${reportId}`,
   );
 
-  console.log(response.data);
   return response.data;
 };
 
 const getAllInterviewReports = async () => {
   const response = await api.get("api/v1/interview/report");
 
-  console.log(response.data);
   return response.data;
 };
 

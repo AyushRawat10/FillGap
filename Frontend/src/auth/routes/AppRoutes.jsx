@@ -23,11 +23,11 @@ const AppRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/loading" element={<Loader />} />
-      <Route path="/change-password" element={<ChangePassword/>} />
       <Route element={<Protected />}>
         <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/interview/report/:reportId" element={<Report />} />
+      <Route path="/change-password" element={<ChangePassword/>} />
         </Route>
       </Route>
     </Routes>

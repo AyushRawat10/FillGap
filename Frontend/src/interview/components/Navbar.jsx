@@ -1,11 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { ChevronDown, Home, LayoutDashboard, KeyRound, LogOut } from "lucide-react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../auth/hooks/useAuth.hook.js";
+import { AuthContext } from "../../auth/context/AuthContext.jsx";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const {handleLogout, loading} = useAuth()
+  const context = useContext(AuthContext);
+  const {setUser} = context
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -16,6 +21,17 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleLogoutClick = async () => {
+    try {
+      await handleLogout()
+    } catch (error) {
+      console.log("Logout error : ", error)
+    } finally {
+      setUser(null)
+      navigate("/")
+    }
+  }
 
   return (
     <nav className="fgic-dash-nav">
@@ -54,7 +70,9 @@ const Navbar = () => {
               <KeyRound size={16} />
               Change Password
             </div>
-            <div className="fgic-dropdown-item">
+            <div className="fgic-dropdown-item"
+            onClick={handleLogoutClick}
+            >
               <LogOut size={16} />
               Logout
             </div>

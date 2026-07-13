@@ -11,7 +11,7 @@ const Protected = () => {
   }
 
   if (!user) {
-    return <Navigate to="/api/v1/auth/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;

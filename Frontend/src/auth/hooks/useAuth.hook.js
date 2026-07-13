@@ -46,6 +46,8 @@ export const useAuth = () => {
       const data = await logoutUser();
       setUser(null);
     } catch (error) {
+      console.log(error)
+      throw error
     } finally {
       setLoading(false);
     }
