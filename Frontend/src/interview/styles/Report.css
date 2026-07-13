@@ -7,11 +7,11 @@
   width: 100%;
   background-color: #0d0806;
   color: #f2e9e4;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 /* Nav */
-
 
 /* Body layout */
 .fgir-dash-body {
@@ -40,6 +40,12 @@
   padding: 24px;
 }
 
+.fgir-sidebar-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 25px;
+}
+
 .fgir-sidebar-list {
   display: flex;
   flex-direction: column;
@@ -58,7 +64,9 @@
   padding: 12px 14px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .fgir-sidebar-item:hover {
@@ -114,7 +122,11 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: radial-gradient(circle at 50% 40%, rgba(225, 29, 29, 0.12), transparent 70%);
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(225, 29, 29, 0.12),
+    transparent 70%
+  );
   border: 1px solid #2a1b16;
   border-radius: 50%;
 }

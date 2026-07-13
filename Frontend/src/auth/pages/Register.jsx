@@ -60,7 +60,7 @@ const Register = () => {
     const success = await handleRegister({ username, email, password });
 
     if (success) {
-      navigate("/api/v1/auth/login");
+      navigate("/login");
     }
   };
 
@@ -75,7 +75,7 @@ const Register = () => {
         <div className="fgr-logo">FILL GAP</div>
 
         <div className="fgr-nav-actions">
-          <Link to="/api/v1/auth/login" className="fgr-signin-link">
+          <Link to="/login" className="fgr-signin-link">
             Sign In
           </Link>
           <Link to="/">
@@ -208,7 +208,7 @@ const Register = () => {
 
           <p className="fgr-footer-text">
             Do you have an account?{" "}
-            <Link to="/api/v1/auth/login" className="fgr-inline-link">
+            <Link to="/login" className="fgr-inline-link">
               Login
             </Link>
           </p>

@@ -13,10 +13,10 @@ const Landing = () => {
         <div className="fgland-logo">FILL GAP</div>
 
         <div className="fgland-nav-actions">
-          <Link to="/api/v1/auth/login">
+          <Link to="/login">
             <button className="fgland-btn-outline">Login</button>
           </Link>
-          <Link to="/api/v1/auth/register">
+          <Link to="/register">
             <button className="fgland-btn-primary">Sign Up</button>
           </Link>
         </div>
@@ -50,12 +50,19 @@ const Landing = () => {
         <div className="fgland-cta-row">
           <button
             className="fgland-cta-primary"
-            onClick={() => navigate("/api/v1/auth/register")}
+            onClick={() => navigate("/register")}
           >
             Start Your First Mission
             <ArrowRight size={18} />
           </button>
-          <button className="fgland-cta-secondary">Documentation</button>
+          <a
+            className="fgland-cta-secondary"
+            href="https://github.com/AyushRawat10/FillGap/blob/main/README.md"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Documentation
+          </a>
         </div>
       </main>
 
@@ -71,9 +78,9 @@ const Landing = () => {
         </div>
 
         <div className="fgland-footer-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Contact</a>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/terms">Terms</Link>
+          <Link to="/contact">Contact</Link>
         </div>
 
         <p className="fgland-copyright">

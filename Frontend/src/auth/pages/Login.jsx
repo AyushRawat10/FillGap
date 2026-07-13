@@ -64,7 +64,7 @@ const Login = () => {
         <div className="fgl-logo">FILL GAP</div>
 
         <div className="fgl-nav-actions">
-          <Link to="/api/v1/auth/register" className="fgl-signin-link">Sign Up</Link>
+          <Link to="/register" className="fgl-signin-link">Sign Up</Link>
           <Link to="/"><button className="fgl-btn-primary">Back to Home</button></Link>
         </div>
       </nav>
@@ -130,7 +130,7 @@ const Login = () => {
 
           <p className="fgl-signup-text">
             Don&apos;t have an account?{" "}
-            <Link to="/api/v1/auth/register" className="fgl-signup-link">Register</Link>
+            <Link to="/register" className="fgl-signup-link">Register</Link>
           </p>
         </div>
       </main>

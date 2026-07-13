@@ -153,6 +153,7 @@
 .fgland-cta-secondary {
   background-color: #17110e;
   color: #f2e9e4;
+  text-decoration: none;
   font-size: 15px;
   font-weight: 600;
   padding: 14px 26px;
@@ -164,6 +165,11 @@
 
 .fgland-cta-secondary:hover {
   background-color: #20150f;
+}
+
+.fgland-cta-secondary-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Footer */

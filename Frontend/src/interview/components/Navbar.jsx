@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, Home, LayoutDashboard, KeyRound, LogOut } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -35,22 +37,26 @@ const Navbar = () => {
 
         {open && (
           <div className="fgic-dropdown">
-            <a href="#" className="fgic-dropdown-item">
+            <div className="fgic-dropdown-item"
+            onClick={() => navigate("/")}
+            >
               <Home size={16} />
               Home
-            </a>
-            <a href="#" className="fgic-dropdown-item">
+            </div>
+            <div className="fgic-dropdown-item"
+            onClick={() => navigate("/dashboard")}
+            >
               <LayoutDashboard size={16} />
               Dashboard
-            </a>
-            <a href="#" className="fgic-dropdown-item">
+            </div>
+            <div className="fgic-dropdown-item">
               <KeyRound size={16} />
               Change Password
-            </a>
-            <a href="#" className="fgic-dropdown-item">
+            </div>
+            <div className="fgic-dropdown-item">
               <LogOut size={16} />
               Logout
-            </a>
+            </div>
           </div>
         )}
       </div>

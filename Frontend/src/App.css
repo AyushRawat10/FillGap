@@ -92,7 +92,9 @@ body,
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .fgic-toggle-btn:hover {
@@ -147,7 +149,9 @@ body,
   color: #cfc3bd;
   text-decoration: none;
   border-radius: 6px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .fgic-dropdown-item:hover {
@@ -172,7 +176,7 @@ body,
     "Helvetica Neue",
     sans-serif;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 24px 50px;
 }
 
 .fgic-reports-header {
@@ -190,13 +194,25 @@ body,
 }
 
 .fgic-view-all {
-  font-size: 13px;
-  color: #f4623a;
-  text-decoration: none;
+  background-color: #d81f1f;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .fgic-view-all:hover {
-  color: #f4a58a;
+  background-color: #b81717;
+}
+
+.fgic-view-all:active {
+  transform: scale(0.95);
 }
 
 .fgic-reports-list {
@@ -287,13 +303,49 @@ body,
     width: 50%;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 12px;
   }
 
   .fgic-reports-header {
-    padding: 30px 20px 20px;
+    padding: 30px 10px 20px;
   }
 
   .fgic-reports-header h2 {
     font-size: 16px;
+  }
+
+  .fgic-view-all {
+    font-weight: 500;
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+
+  .fgic-report-row {
+    gap: 0px;
+    padding: 18px 5px;
+  }
+
+  .fgic-report-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .fgic-report-date {
+    width: 35%;
+  }
+
+  .fgic-report-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .fgic-score-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: #e11d1d;
   }
 }

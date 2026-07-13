@@ -62,6 +62,7 @@ const Report = () => {
       <div className="fgir-dash-body">
         {/* Sidebar */}
         <aside className="fgir-sidebar">
+          <div className="fgir-sidebar-title">{report.title}</div>
           <div className="fgir-sidebar-label">SECTIONS</div>
           <div className="fgir-sidebar-list">
             {sections.map((s) => {
