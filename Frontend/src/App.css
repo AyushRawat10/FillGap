@@ -179,7 +179,7 @@ body,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 48px 0 20px;
+  padding: 20px 50px 20px;
   color: #f2e9e4;
 }
 
@@ -287,5 +287,13 @@ body,
     width: 50%;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .fgic-reports-header {
+    padding: 30px 20px 20px;
+  }
+
+  .fgic-reports-header h2 {
+    font-size: 16px;
   }
 }

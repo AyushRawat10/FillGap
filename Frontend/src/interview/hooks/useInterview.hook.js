@@ -14,44 +14,52 @@ export const useInterview = () => {
 
   const handleToGenerateInterviewReport = async ({selfDescription, jobDescription, resumeFile}) => {
     setLoading(true);
+    let response = null;
     try {
-      const response = await generateInterviewReport({
+      response = await generateInterviewReport({
         jobDescription,
         selfDescription,
         resumeFile,
       });
       console.log(response.data)
       setReport(response.data)
-      return response.data
     } catch (error) {
-        console.log("handleToGenerateInterviewReport : ",error)
+      console.log("handleToGenerateInterviewReport : ",error)
     } finally {
-        setLoading(false)
+      setLoading(false)
     }
+
+    return response.data
   };
 
   const handleToGetReportById = async (reportId) => {
     setLoading(true)
+    let response = null;
     try {
-        const response = await getInterviewReportById(reportId)
+        response = await getInterviewReportById(reportId)
         setReport(response.data)
     } catch (error) {
         console.log("handleToGetReportById : ", error)
     } finally {
         setLoading(false)
     }
+
+    return response.data
   }
 
   const hadleToGetAllReports = async () => {
     setLoading(true)
+    let response = null;
     try {
-        const response = await getAllInterviewReports()
+        response = await getAllInterviewReports()
         setAllReports(response.data)
     } catch (error) {
         console.log("handleToGetAllReports : ", error)
     } finally {
         setLoading(false)
     }
+
+    return response.data
   }
 
   return {loading, report, allReports, handleToGenerateInterviewReport, handleToGetReportById, hadleToGetAllReports}

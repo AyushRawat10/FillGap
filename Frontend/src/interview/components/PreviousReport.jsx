@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FileText, ChevronRight } from "lucide-react";
+import { useInterview } from "../hooks/useInterview.hook.js";
 
 const previousReports = [
   {
@@ -23,6 +24,9 @@ const previousReports = [
 ];
 
 const PreviousReport = () => {
+  const {loading, reports, hadleToGetAllReports} = useInterview();
+
+  console.log(reports)
   return (
     <>
     <div className="fgic-footer-body">
