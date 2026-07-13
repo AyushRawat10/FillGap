@@ -35,4 +35,13 @@ const getMe = async () => {
   return response.data.data;
 };
 
-export { registerUser, loginUser, logoutUser, getMe };
+const changeCurrentPassword = async ({oldPassword, newPassword}) => {
+  const response = await api.post("/api/v1/auth/change-password", {
+    oldPassword,
+    newPassword
+  });
+
+  return response.data.data;
+}
+
+export { registerUser, loginUser, logoutUser, getMe, changeCurrentPassword };

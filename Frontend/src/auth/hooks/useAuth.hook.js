@@ -4,7 +4,8 @@ import {
   registerUser,
   loginUser,
   logoutUser,
-  getMe
+  getMe,
+  changeCurrentPassword,
 } from "../services/auth.service.js";
 
 export const useAuth = () => {
@@ -19,7 +20,7 @@ export const useAuth = () => {
       return true;
     } catch (error) {
       console.log(error);
-      return false;
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -33,7 +34,7 @@ export const useAuth = () => {
       return true;
     } catch (error) {
       console.log(error);
-      return false;
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -45,11 +46,31 @@ export const useAuth = () => {
       const data = await logoutUser();
       setUser(null);
     } catch (error) {
-
     } finally {
       setLoading(false);
     }
   };
 
-  return { user, loading, handleRegister, handleLogin, handleLogout };
+  const handleChangeCurrentPassword = async ({ oldPassword, newPassword }) => {
+    setLoading(true);
+    try {
+      const data = await changeCurrentPassword({ oldPassword, newPassword });
+
+      console.log(data);
+    } catch (error) {
+      console.log("handleChangeCurrentPassword : ", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return {
+    user,
+    loading,
+    handleRegister,
+    handleLogin,
+    handleLogout,
+    handleChangeCurrentPassword,
+  };
 };
