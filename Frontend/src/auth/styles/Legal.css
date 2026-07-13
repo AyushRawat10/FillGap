@@ -1,6 +1,12 @@
 .fgi-legal-page {
   min-height: 100vh;
-  background-color: #0d0806;
+  background:
+    radial-gradient(
+      ellipse 700px 600px at 15% 30%,
+      rgba(120, 20, 10, 0.35),
+      transparent 70%
+    ),
+    #0d0806;
   display: flex;
   justify-content: center;
   padding: 60px 24px;
@@ -30,7 +36,7 @@
 
 .fgi-legal-card h2 {
   font-size: 18px;
-  color: #f4623a;
+  color: #e5231f;
   margin-bottom: 8px;
 }
 

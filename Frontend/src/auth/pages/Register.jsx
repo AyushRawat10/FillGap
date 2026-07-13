@@ -4,11 +4,13 @@ import { FileText, BarChart3, Eye, EyeOff } from "lucide-react";
 import "../styles/Register.css";
 import { useAuth } from "../hooks/useAuth.hook.js";
 import Loader from "../components/Loader.jsx";
+import AlertMessage from "../components/AlertMessage.jsx";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const { loading, handleRegister } = useAuth();
@@ -57,10 +59,16 @@ const Register = () => {
       return;
     }
 
-    const success = await handleRegister({ username, email, password });
+    setError("");
 
-    if (success) {
-      navigate("/login");
+    try {
+      const success = await handleRegister({ username, email, password });
+
+      if (success) {
+        navigate("/login");
+      }
+    } catch (err) {
+      setError(err?.response?.data?.message || "Registration failed. Please try again.")
     }
   };
 
@@ -196,7 +204,7 @@ const Register = () => {
                 <p className="text-red-500">{errors.password}</p>
               )}
             </div>
-
+              <AlertMessage type="error" message={error} />
             <button
               type="submit"
               className="fgr-submit-btn"
@@ -227,9 +235,9 @@ const Register = () => {
         </div>
 
         <div className="fgr-footer-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Contact</a>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/terms">Terms</Link>
+          <Link to="/contact">Contact</Link>
         </div>
 
         <p className="fgr-copyright">© 2024 Fill Gap. All rights reserved.</p>

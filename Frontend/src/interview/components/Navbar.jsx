@@ -49,7 +49,8 @@ const Navbar = () => {
               <LayoutDashboard size={16} />
               Dashboard
             </div>
-            <div className="fgic-dropdown-item">
+            <div className="fgic-dropdown-item"
+            onClick={() => navigate("/change-password")}>
               <KeyRound size={16} />
               Change Password
             </div>

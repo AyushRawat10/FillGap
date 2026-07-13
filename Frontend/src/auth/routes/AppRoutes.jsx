@@ -11,6 +11,7 @@ import Protected from "../components/Protected.jsx";
 import Privacy from "../pages/Privacy.jsx";
 import Terms from "../pages/Terms.jsx";
 import Contact from "../pages/Contact.jsx";
+import ChangePassword from "../pages/ChangePassword.jsx";
 
 const AppRoutes = () => {
   return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/loading" element={<Loader />} />
+      <Route path="/change-password" element={<ChangePassword/>} />
       <Route element={<Protected />}>
         <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />

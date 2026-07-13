@@ -1,0 +1,54 @@
+.fga-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.fga-alert-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.fga-alert-error {
+  background-color: #1a0d0d;
+  color: #ff8080;
+  border: 1px solid #3a1a1a;
+}
+
+.fga-alert-error .fga-alert-icon {
+  color: #ff6b6b;
+}
+
+.fga-alert-success {
+  background-color: #0d1a11;
+  color: #86e0a8;
+  border: 1px solid #16291b;
+}
+
+.fga-alert-success .fga-alert-icon {
+  color: #4ade80;
+}
+
+.fga-alert-warning {
+  background-color: #1a150d;
+  color: #e0c586;
+  border: 1px solid #291f16;
+}
+
+.fga-alert-warning .fga-alert-icon {
+  color: #f4a53a;
+}
+
+.fga-alert-info {
+  background-color: #0d141a;
+  color: #86b8e0;
+  border: 1px solid #16222a;
+}
+
+.fga-alert-info .fga-alert-icon {
+  color: #4a9ae0;
+}

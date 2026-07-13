@@ -4,13 +4,15 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import "../styles/Login.css";
 import { useAuth } from "../hooks/useAuth.hook.js";
 import Loader from "../components/Loader.jsx";
+import AlertMessage from "../components/AlertMessage.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const [errors, setErrors] = useState({});
-  const {loading, handleLogin} = useAuth();
+  const { loading, handleLogin } = useAuth();
 
   const navigate = useNavigate();
 
@@ -19,42 +21,52 @@ const Login = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if(!email.trim()) {
+    if (!email.trim()) {
       newErrors.email = "Email is required !";
-    } else if(!emailRegex.test(email)) {
+    } else if (!emailRegex.test(email)) {
       newErrors.email = "Please enter a valid email address !";
     }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
-    if(!password) {
+    if (!password) {
       newErrors.password = "Password is required !";
-    } else if(!passwordRegex.test(password)) {
-      newErrors.password = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character !"
+    } else if (!passwordRegex.test(password)) {
+      newErrors.password =
+        "Password must be at least 8 characters and include uppercase, lowercase, number, and special character !";
     }
 
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
-  }
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if(!validateForm()) {
-      return
+    if (!validateForm()) {
+      return;
     }
 
-    const success = await handleLogin({email, password});
+    setError("");
 
-    if(success) {
-      navigate("/dashboard")
+    try {
+      const success = await handleLogin({ email, password });
+
+      if (success) {
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      setError(
+      err?.response?.data?.message || "Login failed. Please try again.",
+    );
     }
 
-  }
+  };
 
-  if(loading) {
-    return (<Loader text="Unlocking your account..." />)
+  if (loading) {
+    return <Loader text="Unlocking your account..." />;
   }
 
   return (
@@ -64,8 +76,12 @@ const Login = () => {
         <div className="fgl-logo">FILL GAP</div>
 
         <div className="fgl-nav-actions">
-          <Link to="/register" className="fgl-signin-link">Sign Up</Link>
-          <Link to="/"><button className="fgl-btn-primary">Back to Home</button></Link>
+          <Link to="/register" className="fgl-signin-link">
+            Sign Up
+          </Link>
+          <Link to="/">
+            <button className="fgl-btn-primary">Back to Home</button>
+          </Link>
         </div>
       </nav>
 
@@ -92,7 +108,7 @@ const Login = () => {
                   className="fgl-input"
                 />
               </div>
-              {errors.email && (<p className="text-red-500">{errors.email}</p>)}
+              {errors.email && <p className="text-red-500">{errors.email}</p>}
             </div>
 
             <div className="fgl-field">
@@ -120,9 +136,11 @@ const Login = () => {
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
-              {errors.password && (<p className="text-red-500">{errors.password}</p>)}
+              {errors.password && (
+                <p className="text-red-500">{errors.password}</p>
+              )}
             </div>
-
+            <AlertMessage type="error" message={error} />
             <button type="submit" className="fgl-signin-btn">
               SIGN IN
             </button>
@@ -130,7 +148,9 @@ const Login = () => {
 
           <p className="fgl-signup-text">
             Don&apos;t have an account?{" "}
-            <Link to="/register" className="fgl-signup-link">Register</Link>
+            <Link to="/register" className="fgl-signup-link">
+              Register
+            </Link>
           </p>
         </div>
       </main>
@@ -140,9 +160,9 @@ const Login = () => {
         <div className="fgl-logo">FILL GAP</div>
         <div className="fgl-footer-right">
           <div className="fgl-footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Contact</a>
+            <Link to="/privacy">Privacy</Link>
+            <Link to="/terms">Terms</Link>
+            <Link to="/contact">Contact</Link>
           </div>
           <p className="fgl-copyright">© 2024 FillGap. All rights reserved.</p>
         </div>
