@@ -8,13 +8,19 @@ import Dashboard from "../../interview/pages/Dashboard.jsx";
 import Report from "../../interview/pages/Report.jsx";
 import MainLayout from "../../interview/layouts/MainLayout.jsx";
 import Protected from "../components/Protected.jsx";
+import Privacy from "../pages/Privacy.jsx";
+import Terms from "../pages/Terms.jsx";
+import Contact from "../pages/Contact.jsx";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="/api/v1/auth/register" element={<Register />} />
-      <Route path="/api/v1/auth/login" element={<Login />} />
+      <Route path="/contact" element={<Contact/>} />
+      <Route path="/terms" element={<Terms/>} />
+      <Route path="/privacy" element={<Privacy/>} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/loading" element={<Loader />} />
       <Route element={<Protected />}>
         <Route element={<MainLayout />}>

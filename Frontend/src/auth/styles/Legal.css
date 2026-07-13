@@ -1,0 +1,70 @@
+.fgi-legal-page {
+  min-height: 100vh;
+  background-color: #0d0806;
+  display: flex;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+.fgi-legal-card {
+  max-width: 720px;
+  width: 100%;
+  color: #e8dcd6;
+}
+
+.fgi-legal-card h1 {
+  font-size: 32px;
+  color: #f0e6e6;
+  margin-bottom: 6px;
+}
+
+.fgi-legal-updated {
+  color: #8a6f6f;
+  font-size: 13px;
+  margin-bottom: 32px;
+}
+
+.fgi-legal-card section {
+  margin-bottom: 24px;
+}
+
+.fgi-legal-card h2 {
+  font-size: 18px;
+  color: #f4623a;
+  margin-bottom: 8px;
+}
+
+.fgi-legal-card p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #b3a39b;
+}
+
+.fgi-legal-card a {
+  color: #f4a58a;
+}
+
+.fgi-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.fgi-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #b3a39b;
+  text-decoration: none;
+  padding: 12px 16px;
+  background-color: #12090a;
+  border: 1px solid #2a1414;
+  border-radius: 8px;
+  transition: border-color 0.15s ease;
+}
+
+.fgi-contact-item:hover {
+  border-color: #f4623a;
+  color: #f0e6e6;
+}
