@@ -14,6 +14,7 @@ import Contact from "../pages/Contact.jsx";
 import ChangePassword from "../pages/ChangePassword.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
 import ResetPassword from "../pages/ResetPassword.jsx";
+import VerifyEmail from "../pages/VerifyEmail.jsx";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoutes = () => {
       <Route path="/terms" element={<Terms/>} />
       <Route path="/privacy" element={<Privacy/>} />
       <Route path="/register" element={<Register />} />
+      <Route path="/api/v1/auth/verify-email/:token" element={<VerifyEmail />} />
       <Route path="/login" element={<Login />} />
       <Route path="/loading" element={<Loader />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />

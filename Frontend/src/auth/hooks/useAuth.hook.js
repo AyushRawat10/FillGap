@@ -80,11 +80,11 @@ export const useAuth = () => {
     }
   };
 
-  const handleEmailVerification = async ({ tokenId }) => {
+  const handleEmailVerification = async ({ token }) => {
     setLoading(true);
-    let data;
     try {
-      data = await emailVerification({tokenId});
+      const data = await emailVerification({verificationToken: token});
+      return data
     } catch (error) {
       console.log("handleEmailVerification : ", error);
       throw error;
@@ -92,8 +92,6 @@ export const useAuth = () => {
       setLoading(false);
     }
 
-    console.log(data);
-    return data;
   };
 
   const handleResetPasswordVerification = async ({token, newPassword}) => {

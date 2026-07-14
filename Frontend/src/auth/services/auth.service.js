@@ -45,23 +45,23 @@ const changeCurrentPassword = async ({ oldPassword, newPassword }) => {
 };
 
 const forgotPassword = async ({ email }) => {
-  const response = await api.post("api/v1/auth/forgot-password", {
+  const response = await api.post("/api/v1/auth/forgot-password", {
     email,
   });
 
   return response.data.data;
 };
 
-const emailVerification = async ({ emailVerificationId }) => {
+const emailVerification = async ({ verificationToken }) => {
   const response = await api.get(
-    `api/v1/auth/verify-email/${emailVerificationId}`,
+    `/api/v1/auth/verify-email/${verificationToken}`,
   );
 
   return response.data.data;
 };
 
 const resetPasswordVerification = async ({ resetToken, newPassword }) => {
-  const response = await api.post(`api/v1/auth/reset-password/${resetToken}`, {
+  const response = await api.post(`/api/v1/auth/reset-password/${resetToken}`, {
     newPassword,
   });
 
