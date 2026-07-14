@@ -20,11 +20,14 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="/contact" element={<Contact/>} />
-      <Route path="/terms" element={<Terms/>} />
-      <Route path="/privacy" element={<Privacy/>} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/privacy" element={<Privacy />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/api/v1/auth/verify-email/:token" element={<VerifyEmail />} />
+      <Route
+        path="/api/v1/auth/verify-email/:token"
+        element={<VerifyEmail />}
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/loading" element={<Loader />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -33,7 +36,7 @@ const AppRoutes = () => {
         <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/interview/report/:reportId" element={<Report />} />
-      <Route path="/change-password" element={<ChangePassword/>} />
+          <Route path="/change-password" element={<ChangePassword />} />
         </Route>
       </Route>
     </Routes>

@@ -9,6 +9,7 @@ import {
   forgotPassword,
   emailVerification,
   resetPasswordVerification,
+  resendEmailVerification,
 } from "../services/auth.service.js";
 
 export const useAuth = () => {
@@ -80,6 +81,19 @@ export const useAuth = () => {
     }
   };
 
+  const handleResetPasswordVerification = async ({token, newPassword}) => {
+    setLoading(true)
+    try {
+      const data = await resetPasswordVerification({resetToken: token, newPassword})
+      return data;
+    } catch (error) {
+      console.log("handleResetPasswordVerification : ", error)
+      throw error;
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const handleEmailVerification = async ({ token }) => {
     setLoading(true);
     try {
@@ -94,17 +108,13 @@ export const useAuth = () => {
 
   };
 
-  const handleResetPasswordVerification = async ({token, newPassword}) => {
-    setLoading(true)
+  const handleResendEmailVerification = async () => {
     try {
-      const data = await resetPasswordVerification({resetToken: token, newPassword})
-      return data;
+      await resendEmailVerification()
     } catch (error) {
-      console.log("handleResetPasswordVerification : ", error)
-      throw error;
-    } finally {
-      setLoading(false)
-    }
+      console.log("handleResendEmailVerification : ", error)
+      throw error
+    } 
   }
 
   return {
@@ -116,6 +126,7 @@ export const useAuth = () => {
     handleChangeCurrentPassword,
     handleForgotPassword,
     handleEmailVerification,
-    handleResetPasswordVerification
+    handleResetPasswordVerification,
+    handleResendEmailVerification
   };
 };

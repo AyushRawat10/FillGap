@@ -52,6 +52,14 @@ const forgotPassword = async ({ email }) => {
   return response.data.data;
 };
 
+const resetPasswordVerification = async ({ resetToken, newPassword }) => {
+  const response = await api.post(`/api/v1/auth/reset-password/${resetToken}`, {
+    newPassword,
+  });
+
+  return response.data.data;
+};
+
 const emailVerification = async ({ verificationToken }) => {
   const response = await api.get(
     `/api/v1/auth/verify-email/${verificationToken}`,
@@ -60,13 +68,11 @@ const emailVerification = async ({ verificationToken }) => {
   return response.data.data;
 };
 
-const resetPasswordVerification = async ({ resetToken, newPassword }) => {
-  const response = await api.post(`/api/v1/auth/reset-password/${resetToken}`, {
-    newPassword,
-  });
+const resendEmailVerification = async () => {
+  const response = await api.post("/api/v1/auth/resend-email-verification")
 
-  return response.data.data;
-};
+  return response.data.data
+}
 
 export {
   registerUser,
@@ -77,4 +83,5 @@ export {
   forgotPassword,
   emailVerification,
   resetPasswordVerification,
+  resendEmailVerification
 };

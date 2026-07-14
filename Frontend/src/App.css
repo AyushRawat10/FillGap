@@ -149,14 +149,26 @@ body,
   color: #cfc3bd;
   text-decoration: none;
   border-radius: 6px;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
 }
 
-.fgic-dropdown-item:hover {
+.fgic-dropdown-danger-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #cfc3bd;
+  text-decoration: none;
+  border-radius: 6px;
   background-color: #1a110d;
   color: #e11d1d;
+}
+
+.fgic-dropdown-item-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .fgic-footer-body {

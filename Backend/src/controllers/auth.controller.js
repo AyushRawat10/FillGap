@@ -226,7 +226,7 @@ const resendEmailVerification = asyncHandler(async (req, res) => {
         subject: "Verify Your Email Address | FillGap",
         mailgenContent: emailVerificationMailgenContent(
             user.username,
-            `${req.protocol}://localhost:5173/api/v1/users/verify-email/${unHashedToken}`
+            `${req.protocol}://localhost:5173/api/v1/auth/verify-email/${unHashedToken}`
         ),
     });
 
