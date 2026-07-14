@@ -20,7 +20,7 @@ router.route("/login").post(loginUser);
 router.route("/verify-email/:verificationToken").get(emailVerification);
 router.route("/refresh-token").post(refreshAccessToken);
 router.route("/forgot-password").post(forgotPasswordRequest);
-router.route("/reset-password/:resetToken").get(resetForgotPassword);
+router.route("/reset-password/:resetToken").post(resetForgotPassword);
 
 // Protected routes
 router.route("/logout").post(verifyJWT, logoutUser);

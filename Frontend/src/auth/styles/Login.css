@@ -82,6 +82,7 @@
   border: 1px solid #2a1b16;
   border-radius: 12px;
   padding: 40px;
+  box-shadow: 0 0 40px rgba(180, 30, 20, 0.12);
 }
 
 .fgl-title {
@@ -314,6 +315,21 @@
   font-size: 12px;
   color: #6b5c54;
   margin: 0;
+}
+
+/* Back link */
+.fgl-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #8a6f6f;
+  font-size: 13px;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.fgl-back-link:hover {
+  color: #f0e6e6;
 }
 
 /* Responsive */

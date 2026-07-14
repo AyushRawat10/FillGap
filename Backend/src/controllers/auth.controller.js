@@ -8,6 +8,7 @@ import {
     sendEmail,
 } from "../utils/mail.util.js";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -27,11 +28,12 @@ const generateAccessAndRefreshToken = async (userId) => {
     }
 };
 
+// route to be changed after deploying...
 const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
-        new ApiError(400, "Required all details");
+        throw new ApiError(400, "Required all details");
     }
 
     const existedUser = await User.findOne({
@@ -39,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (existedUser) {
-        new ApiError(409, "User already registered !");
+        throw new ApiError(409, "User already registered !");
     }
 
     const user = await User.create({
@@ -62,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
         subject: "Verify Your Email Address | FillGap",
         mailgenContent: emailVerificationMailgenContent(
             user.username,
-            `${req.protocol}://${req.get("host")}/api/v1/auth/verify-email/${unHashedToken}`
+            `${req.protocol}://localhost:5173/api/v1/auth/verify-email/${unHashedToken}`
         ),
     });
 
@@ -200,6 +202,7 @@ const emailVerification = asyncHandler(async (req, res) => {
         );
 });
 
+// route to be changed after deploying...
 const resendEmailVerification = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
@@ -223,7 +226,7 @@ const resendEmailVerification = asyncHandler(async (req, res) => {
         subject: "Verify Your Email Address | FillGap",
         mailgenContent: emailVerificationMailgenContent(
             user.username,
-            `${req.protocol}://${req.get("host")}/api/v1/users/verify-email/${unHashedToken}`
+            `${req.protocol}://localhost:5173/api/v1/users/verify-email/${unHashedToken}`
         ),
     });
 
@@ -281,6 +284,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 });
 
+// route to be changed after deploying...
 const forgotPasswordRequest = asyncHandler(async (req, res) => {
     const { email } = req.body;
 
@@ -307,7 +311,7 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
         subject: "Password reset request",
         mailgenContent: forgotPasswordMailgenContent(
             user.username,
-            `${req.protocol}://${req.get("host")}/reset-password/${unHashedToken}`
+            `${req.protocol}://localhost:5173/reset-password/${unHashedToken}`
         ),
     });
 
@@ -384,5 +388,5 @@ export {
     refreshAccessToken,
     forgotPasswordRequest,
     resetForgotPassword,
-    changeCurrentPassword
+    changeCurrentPassword,
 };

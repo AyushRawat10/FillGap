@@ -19,7 +19,7 @@ const loginUser = async ({ email, password }) => {
     email,
     password,
   });
-  
+
   return response.data.data;
 };
 
@@ -35,13 +35,46 @@ const getMe = async () => {
   return response.data.data;
 };
 
-const changeCurrentPassword = async ({oldPassword, newPassword}) => {
+const changeCurrentPassword = async ({ oldPassword, newPassword }) => {
   const response = await api.post("/api/v1/auth/change-password", {
     oldPassword,
-    newPassword
+    newPassword,
   });
 
   return response.data.data;
-}
+};
 
-export { registerUser, loginUser, logoutUser, getMe, changeCurrentPassword };
+const forgotPassword = async ({ email }) => {
+  const response = await api.post("api/v1/auth/forgot-password", {
+    email,
+  });
+
+  return response.data.data;
+};
+
+const emailVerification = async ({ emailVerificationId }) => {
+  const response = await api.get(
+    `api/v1/auth/verify-email/${emailVerificationId}`,
+  );
+
+  return response.data.data;
+};
+
+const resetPasswordVerification = async ({ resetToken, newPassword }) => {
+  const response = await api.post(`api/v1/auth/reset-password/${resetToken}`, {
+    newPassword,
+  });
+
+  return response.data.data;
+};
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getMe,
+  changeCurrentPassword,
+  forgotPassword,
+  emailVerification,
+  resetPasswordVerification,
+};

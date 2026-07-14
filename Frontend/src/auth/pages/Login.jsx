@@ -114,9 +114,9 @@ const Login = () => {
             <div className="fgl-field">
               <div className="fgl-label-row">
                 <label className="fgl-label">PASSWORD</label>
-                <a href="#" className="fgl-forgot-link">
+                <Link to="/forgot-password" className="fgl-forgot-link">
                   Forgot Password?
-                </a>
+                </Link>
               </div>
               <div className="fgl-input-wrap">
                 <Lock size={18} className="fgl-icon" />

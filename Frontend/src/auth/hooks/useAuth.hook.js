@@ -6,6 +6,9 @@ import {
   logoutUser,
   getMe,
   changeCurrentPassword,
+  forgotPassword,
+  emailVerification,
+  resetPasswordVerification,
 } from "../services/auth.service.js";
 
 export const useAuth = () => {
@@ -46,8 +49,8 @@ export const useAuth = () => {
       const data = await logoutUser();
       setUser(null);
     } catch (error) {
-      console.log(error)
-      throw error
+      console.log(error);
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -57,8 +60,6 @@ export const useAuth = () => {
     setLoading(true);
     try {
       const data = await changeCurrentPassword({ oldPassword, newPassword });
-
-      console.log(data);
     } catch (error) {
       console.log("handleChangeCurrentPassword : ", error);
       throw error;
@@ -67,6 +68,47 @@ export const useAuth = () => {
     }
   };
 
+  const handleForgotPassword = async ({ email }) => {
+    setLoading(true);
+    try {
+      const data = await forgotPassword({ email });
+    } catch (error) {
+      console.log("handleForgotPassword : ", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEmailVerification = async ({ tokenId }) => {
+    setLoading(true);
+    let data;
+    try {
+      data = await emailVerification({tokenId});
+    } catch (error) {
+      console.log("handleEmailVerification : ", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+
+    console.log(data);
+    return data;
+  };
+
+  const handleResetPasswordVerification = async ({token, newPassword}) => {
+    setLoading(true)
+    try {
+      const data = await resetPasswordVerification({resetToken: token, newPassword})
+      return data;
+    } catch (error) {
+      console.log("handleResetPasswordVerification : ", error)
+      throw error;
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return {
     user,
     loading,
@@ -74,5 +116,8 @@ export const useAuth = () => {
     handleLogin,
     handleLogout,
     handleChangeCurrentPassword,
+    handleForgotPassword,
+    handleEmailVerification,
+    handleResetPasswordVerification
   };
 };

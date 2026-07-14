@@ -12,6 +12,8 @@ import Privacy from "../pages/Privacy.jsx";
 import Terms from "../pages/Terms.jsx";
 import Contact from "../pages/Contact.jsx";
 import ChangePassword from "../pages/ChangePassword.jsx";
+import ForgotPassword from "../pages/ForgotPassword.jsx";
+import ResetPassword from "../pages/ResetPassword.jsx";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +25,8 @@ const AppRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/loading" element={<Loader />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
       <Route element={<Protected />}>
         <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
