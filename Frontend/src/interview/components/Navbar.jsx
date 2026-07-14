@@ -18,7 +18,7 @@ const Navbar = () => {
   const [resendLoading, setResendLoading] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-  const { handleLogout, loading, handleResendEmailVerification } = useAuth();
+  const { handleLogout, handleResendEmailVerification } = useAuth();
   const context = useContext(AuthContext);
   const { setUser, user } = context;
 

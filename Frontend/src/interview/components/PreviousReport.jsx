@@ -3,26 +3,6 @@ import { FileText, ChevronRight } from "lucide-react";
 import { useInterview } from "../hooks/useInterview.hook.js";
 import { useNavigate } from "react-router";
 
-const previousReports = [
-  {
-    id: 1,
-    title: "Senior Frontend Engineer @ Google",
-    date: "Analyzed on Oct 24, 2023",
-    score: 92,
-  },
-  {
-    id: 2,
-    title: "Product Designer @ Meta",
-    date: "Analyzed on Oct 20, 2023",
-    score: 78,
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer @ Strfgice",
-    date: "Analyzed on Oct 15, 2023",
-    score: 85,
-  },
-];
 
 const PreviousReport = () => {
   const { loading, allReports, hadleToGetAllReports } = useInterview();
@@ -34,6 +14,10 @@ const PreviousReport = () => {
   }, []);
 
   if (loading) {
+    return null;
+  }
+
+  if(!allReports || allReports.length === 0) {
     return null;
   }
 
