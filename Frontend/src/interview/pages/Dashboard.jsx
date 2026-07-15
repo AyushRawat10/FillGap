@@ -13,11 +13,13 @@ import {
 import "../styles/Dashboard.css";
 import { useInterview } from "../hooks/useInterview.hook.js";
 import Loader from "../../auth/components/Loader.jsx";
+import AlertMessage from "../../auth/components/AlertMessage.jsx"
 
 const Dashboard = () => {
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
   const [resumeFile, setResumeFile] = useState(null);
+  const [error, setError] = useState("");
 
   const { loading, handleToGenerateInterviewReport } = useInterview();
 
@@ -31,17 +33,41 @@ const Dashboard = () => {
   };
 
   const handleSubmit = async () => {
-    const data = await handleToGenerateInterviewReport({
-      jobDescription,
-      selfDescription,
-      resumeFile,
-    });
-    console.log(data)
-    navigate(`/interview/report/${data._id}`);
+    setError("");
+
+    if (!jobDescription.trim()) {
+      setError("Job description is required");
+      return;
+    }
+    if (!resumeFile && !selfDescription.trim()) {
+      setError("Provide a resume or a self description");
+      return;
+    }
+
+    try {
+      const data = await handleToGenerateInterviewReport({
+        jobDescription,
+        selfDescription,
+        resumeFile,
+      });
+     
+      navigate(`/interview/report/${data._id}`);
+    } catch (err) {
+      if (err?.response?.status === 429) {
+        setError(
+          "Our AI model is currently busy. Please wait a moment and try again.",
+        );
+      } else {
+        setError(
+          err?.response?.data?.message ||
+            "Something went wrong. Please try again.",
+        );
+      }
+    }
   };
 
-  if(loading) {
-    return <Loader text="Preparing your report..." />
+  if (loading) {
+    return <Loader text="Preparing your report..." />;
   }
 
   return (
@@ -110,7 +136,9 @@ const Dashboard = () => {
                 />
                 <UploadCloud size={28} className="fgid-dropzone-icon" />
                 <span className="fgid-dropzone-text">
-                  {resumeFile ? resumeFile.name : "Click to upload or drag & drop"}
+                  {resumeFile
+                    ? resumeFile.name
+                    : "Click to upload or drag & drop"}
                 </span>
                 <span className="fgid-dropzone-sub">PDF or DOCX (Max 5MB)</span>
               </label>
@@ -145,6 +173,7 @@ const Dashboard = () => {
             <span className="fgid-footer-note">
               AI-Powered Strategy Generation - Approx 30s
             </span>
+                <AlertMessage type="error" message={error} />
             <button className="fgid-analyze-btn" onClick={handleSubmit}>
               <Sparkles size={16} />
               Analyze Resume

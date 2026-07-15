@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
+import { ApiError } from "../utils/api-error.util.js";
 
 let ai;
 const getClient = () => {
@@ -186,19 +187,32 @@ Job Description: ${jobDescription}
 ${candidateInfo}
 Please provide the report in JSON format, adhering to the following schema: ${JSON.stringify(interviewJsonSchema, null, 2)}`;
 
-    const interviewReportService = await client.interactions.create({
-        model: "gemini-3.5-flash",
-        input: prompt,
-        response_format: {
-            type: "text",
-            mime_type: "application/json",
-            schema: interviewJsonSchema,
-        },
-    });
+    try {
+        const interviewReportService = await client.interactions.create({
+            model: "gemini-3.5-flash",
+            input: prompt,
+            response_format: {
+                type: "text",
+                mime_type: "application/json",
+                schema: interviewJsonSchema,
+            },
+        });
 
-    const interviewReportProvider = interviewJsonSchemaZod.parse(
-        JSON.parse(interviewReportService.output_text)
-    );
+        const interviewReportProvider = interviewJsonSchemaZod.parse(
+            JSON.parse(interviewReportService.output_text)
+        );
 
-    return interviewReportProvider;
+        return interviewReportProvider;
+    } catch (error) {
+        if (
+            error?.status === 429 ||
+            error?.message?.includes("RateLimitError")
+        ) {
+            throw new ApiError(
+                429,
+                "Our AI model is currently busy. Please try again in a moment."
+            );
+        }
+        throw error;
+    }
 };

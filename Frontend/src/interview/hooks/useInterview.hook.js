@@ -25,6 +25,7 @@ export const useInterview = () => {
       setReport(response.data)
     } catch (error) {
       console.log("handleToGenerateInterviewReport : ",error)
+      throw error
     } finally {
       setLoading(false)
     }
