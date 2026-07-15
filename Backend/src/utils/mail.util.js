@@ -6,41 +6,37 @@ const sendEmail = async (options) => {
         theme: "default",
         product: {
             name: "FillGap",
-            link: "https://fill-gap.vercel.app",
+            link: process.env.FRONTEND_URL,
         },
     });
 
     const emailText = mailGenerator.generatePlaintext(options.mailgenContent);
     const emailHtml = mailGenerator.generate(options.mailgenContent);
 
-    const transporter = nodemailer.createTransport({
-        host: process.env.BREVO_SMTP_HOST,
-        port: process.env.BREVO_SMTP_PORT,
-        secure: false,
-        auth: {
-            user: process.env.BREVO_SMTP_USER,
-            pass: process.env.BREVO_SMTP_PASS,
-        },
-        connectionTimeout: 10000,
-        greetingTimeout: 10000,
-        socketTimeout: 10000,
-    });
-
-    const mail = {
-        from: `"${process.env.MAIL_FROM_NAME}" <${process.env.MAIL_FROM_EMAIL}>`,
-        to: options.email,
-        subject: options.subject,
-        text: emailText,
-        html: emailHtml,
-    };
-
     try {
-        await transporter.sendMail(mail);
-    } catch (error) {
-        console.log(
-            "Email service failed siliently. Make sure that you have provided your BREVO credentials in the .env file"
+        await axios.post(
+            "https://api.brevo.com/v3/smtp/email",
+            {
+                sender: {
+                    name: process.env.MAIL_FROM_NAME,
+                    email: process.env.MAIL_FROM_EMAIL,
+                },
+                to: [{ email: options.email }],
+                subject: options.subject,
+                htmlContent: emailHtml,
+            },
+            {
+                headers: {
+                    "api-key": process.env.BREVO_API_KEY,
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+            }
         );
-        console.error("Error : ", error);
+    } catch (error) {
+        console.log("Email service failed. Check your BREVO_API_KEY in .env");
+        console.error("Error : ", error?.response?.data || error.message);
+        throw error;
     }
 };
 
