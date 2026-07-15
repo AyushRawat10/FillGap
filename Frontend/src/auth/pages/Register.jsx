@@ -4,13 +4,13 @@ import { FileText, BarChart3, Eye, EyeOff } from "lucide-react";
 import "../styles/Register.css";
 import { useAuth } from "../hooks/useAuth.hook.js";
 import Loader from "../components/Loader.jsx";
-import AlertMessage from "../components/AlertMessage.jsx";
+import ConfirmationModal from "../components/ConfirmationModal.jsx";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [modal, setModal] = useState({ status: null, message: ""})
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const { loading, handleRegister } = useAuth();
@@ -59,24 +59,29 @@ const Register = () => {
       return;
     }
 
-    setError("");
-
     try {
-      const success = await handleRegister({ username, email, password });
-
-      if (success) {
-        navigate("/login");
-      }
+      await handleRegister({ username, email, password });
+      setModal({
+        status: "success",
+        message: "Registration successful! A verification email has been sent. Redirecting to login..."
+      })
+      setTimeout(() => navigate("/login"), 3000)
     } catch (err) {
-      setError(err?.response?.data?.message || "Registration failed. Please try again.")
+      setModal({
+        status: "error",
+        message: err?.response?.data?.message || "Registration failed. Please try again."
+      })
     }
   };
+
+  const closeModal = () => setModal({ status: null, message: "" });
 
   if (loading) {
     return <Loader text="Creating your account..." />;
   }
 
   return (
+    <>
     <div className="fgr-page">
       {/* Nav */}
       <nav className="fgr-nav">
@@ -204,11 +209,10 @@ const Register = () => {
                 <p className="text-red-500">{errors.password}</p>
               )}
             </div>
-              <AlertMessage type="error" message={error} />
+              
             <button
               type="submit"
               className="fgr-submit-btn"
-              onClick={handleSubmit}
             >
               REGISTER
             </button>
@@ -243,6 +247,12 @@ const Register = () => {
         <p className="fgr-copyright">© 2024 Fill Gap. All rights reserved.</p>
       </footer>
     </div>
+    <ConfirmationModal
+      status={modal.status}
+      message={modal.message}
+      onClose={closeModal}
+    />
+    </>
   );
 };
 
