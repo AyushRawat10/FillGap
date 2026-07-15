@@ -6,7 +6,7 @@ const sendEmail = async (options) => {
         theme: "default",
         product: {
             name: "FillGap",
-            link: "http://localhost:5173", // replace with website url.
+            link: "https://fill-gap.vercel.app",
         },
     });
 
@@ -21,6 +21,9 @@ const sendEmail = async (options) => {
             user: process.env.BREVO_SMTP_USER,
             pass: process.env.BREVO_SMTP_PASS,
         },
+        connectionTimeout: 10000,
+        greetingTimeout: 10000,
+        socketTimeout: 10000,
     });
 
     const mail = {
@@ -29,12 +32,14 @@ const sendEmail = async (options) => {
         subject: options.subject,
         text: emailText,
         html: emailHtml,
-    }
+    };
 
     try {
-        await transporter.sendMail(mail)
+        await transporter.sendMail(mail);
     } catch (error) {
-        console.log("Email service failed siliently. Make sure that you have provided your BREVO credentials in the .env file");
+        console.log(
+            "Email service failed siliently. Make sure that you have provided your BREVO credentials in the .env file"
+        );
         console.error("Error : ", error);
     }
 };
@@ -97,4 +102,4 @@ export {
     sendEmail,
     emailVerificationMailgenContent,
     forgotPasswordMailgenContent,
-}
+};
