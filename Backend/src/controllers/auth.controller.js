@@ -28,7 +28,6 @@ const generateAccessAndRefreshToken = async (userId) => {
     }
 };
 
-// route to be changed after deploying...
 const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -64,7 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
         subject: "Verify Your Email Address | FillGap",
         mailgenContent: emailVerificationMailgenContent(
             user.username,
-            `${req.protocol}://localhost:5173/api/v1/auth/verify-email/${unHashedToken}`
+            `${process.env.FRONTEND_URL}/verify-email/${unHashedToken}`
         ),
     });
 
@@ -120,6 +119,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
+        sameSite: "none"
     };
 
     return res
@@ -151,6 +151,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
+        sameSite: "none"
     };
 
     return res
@@ -202,7 +203,6 @@ const emailVerification = asyncHandler(async (req, res) => {
         );
 });
 
-// route to be changed after deploying...
 const resendEmailVerification = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
@@ -226,7 +226,7 @@ const resendEmailVerification = asyncHandler(async (req, res) => {
         subject: "Verify Your Email Address | FillGap",
         mailgenContent: emailVerificationMailgenContent(
             user.username,
-            `${req.protocol}://localhost:5173/api/v1/auth/verify-email/${unHashedToken}`
+            `${process.env.FRONTEND_URL}/verify-email/${unHashedToken}`
         ),
     });
 
@@ -262,6 +262,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         const options = {
             httpOnly: true,
             secure: true,
+            sameSite: "none"
         };
 
         const { accessToken, refreshToken: newRefreshToken } =
@@ -284,7 +285,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 });
 
-// route to be changed after deploying...
 const forgotPasswordRequest = asyncHandler(async (req, res) => {
     const { email } = req.body;
 
@@ -311,7 +311,7 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
         subject: "Password reset request",
         mailgenContent: forgotPasswordMailgenContent(
             user.username,
-            `${req.protocol}://localhost:5173/reset-password/${unHashedToken}`
+            `${process.env.FRONTEND_URL}/reset-password/${unHashedToken}`
         ),
     });
 

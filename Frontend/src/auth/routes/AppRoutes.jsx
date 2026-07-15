@@ -25,7 +25,7 @@ const AppRoutes = () => {
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/register" element={<Register />} />
       <Route
-        path="/api/v1/auth/verify-email/:token"
+        path="/verify-email/:token"
         element={<VerifyEmail />}
       />
       <Route path="/login" element={<Login />} />
