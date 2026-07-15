@@ -65,7 +65,7 @@ const Register = () => {
         status: "success",
         message: "Registration successful! A verification email has been sent. Redirecting to login..."
       })
-      setTimeout(() => navigate("/login"), 3000)
+      setTimeout(() => navigate("/login"), 2500)
     } catch (err) {
       setModal({
         status: "error",
