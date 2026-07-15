@@ -27,7 +27,8 @@ api.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.includes("/refresh-token")
+      !originalRequest.url.includes("/refresh-token") && 
+      !originalRequest.url.includes("/me")
     ) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
@@ -46,7 +47,6 @@ api.interceptors.response.use(
         return api(originalRequest); 
       } catch (refreshError) {
         processQueue(refreshError);
-        window.location.href = "/login";
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
