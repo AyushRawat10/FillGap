@@ -1,5 +1,6 @@
 import Mailgen from "mailgen";
 import nodemailer from "nodemailer";
+import axios from "axios";
 
 const sendEmail = async (options) => {
     const mailGenerator = new Mailgen({
