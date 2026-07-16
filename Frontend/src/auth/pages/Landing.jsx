@@ -57,7 +57,7 @@ const Landing = () => {
           </button>
           <a
             className="fgland-cta-secondary"
-            href="https://github.com/AyushRawat10/FillGap/blob/main/README.md"
+            href="https://github.com/AyushRawat10/FillGap/blob/main/ARCHITECTURE.md"
             target="_blank"
             rel="noopener noreferrer"
           >
